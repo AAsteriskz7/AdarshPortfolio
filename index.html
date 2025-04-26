@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #e5e7eb;
+            cursor: auto;
+            overflow-x: hidden;
+        }
+
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transition: opacity 1s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+        .reveal-up { transform: translateY(60px); }
+        .reveal-left { transform: translateX(-60px); }
+        .reveal-right { transform: translateX(60px); }
+        .reveal-scale { transform: scale(0.9); }
+        .reveal.visible { opacity: 1; transform: translate(0, 0) scale(1); }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #3b82f6, #a855f7, #22c55e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Sections */
+        section {
+            padding: 120px 5%;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+            background-color: transparent;
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+        }
+        #hero-content-wrapper {
+             position: relative;
+             z-index: 5;
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+             min-height: 100vh;
+             width: 100%;
+             padding: 0 5%;
+             background: rgba(17, 24, 39, 0.7);
+             backdrop-filter: blur(8px);
+        }
+        #hero-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            text-align: left;
+            max-width: 1200px;
+            width: 100%;
+        }
+        #hero-text {
+            flex: 1;
+            min-width: 300px;
+         }
+        #hero-photo {
+            flex-shrink: 0;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #4f46e5;
+            box-shadow: 0 0 25px rgba(79, 70, 229, 0.5);
+         }
+
+        /* Three.js Canvas */
+        #three-canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* Scroll Arrow */
+        .scroll-down-arrow {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .scroll-down-arrow:hover {
+            transform: translateX(-50%) scale(1.1);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .scroll-down-arrow svg {
+            width: 20px;
+            height: 20px;
+            stroke: rgba(255, 255, 255, 0.9);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
+        }
+
+        /* Cards */
+        .card {
+            background-color: #1f2937;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .card.cs-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 25px rgba(59, 130, 246, 0.25); border-color: #3b82f6; }
+        .card.design-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 25px rgba(168, 85, 247, 0.25); border-color: #a855f7; }
+        .card.app-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 25px rgba(34, 197, 94, 0.25); border-color: #22c55e; }
+        .card.blog-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 25px rgba(34, 197, 94, 0.25); border-color: #22c55e; }
+
+        /* Skills */
+        .skill-bar-container {
+            background-color: #374151;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            height: 1rem;
+        }
+        .skill-bar {
+            height: 100%;
+            border-radius: 0.5rem;
+            text-align: right;
+            padding-right: 0.5rem;
+            font-size: 0.75rem;
+            line-height: 1rem;
+            color: white;
+            font-weight: 500;
+            background: linear-gradient(90deg, #3b82f6, #a855f7);
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #4b5563;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            z-index: -1;
+        }
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background: linear-gradient(45deg, #3b82f6, #a855f7);
+            border: 4px solid #1f2937;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .timeline-left { left: 0; }
+        .timeline-right { left: 50%; }
+        .timeline-left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid #4b5563;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent #4b5563;
+        }
+        .timeline-right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid #4b5563;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent #4b5563 transparent transparent;
+        }
+        .timeline-right::after { left: -16px; }
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: #1f2937;
+            position: relative;
+            border-radius: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section { padding: 80px 5%; }
+            #hero-main { flex-direction: column; text-align: center; gap: 1.5rem; }
+            #hero-photo { width: 200px; height: 200px; margin-top: 1rem; }
+            #hero h1 { font-size: 2.5rem; }
+            #hero p { font-size: 1rem; }
+            header nav > div:last-child { display: none; }
+            .grid { grid-template-columns: 1fr; }
+            .timeline::after { left: 31px; }
+            .timeline-container { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-container::before { left: 60px; border: medium solid #4b5563; border-width: 10px 10px 10px 0; border-color: transparent #4b5563 transparent transparent; }
+            .timeline-left::after, .timeline-right::after { left: 15px; }
+            .timeline-right { left: 0%; }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <header class="fixed top-0 left-0 w-full p-4 z-50 bg-gray-900/70 backdrop-blur-md reveal reveal-up">
+        <nav class="container mx-auto flex justify-between items-center">
+            <div class="text-xl font-bold text-blue-400">Your Name</div>
+            <div>
+                <a href="#about" class="text-gray-300 hover:text-purple-400 px-3 py-2 rounded-md text-sm font-semibold transition duration-300">About</a>
+                <a href="#skills" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-semibold transition duration-300">Skills</a>
+                <a href="#experience" class="text-gray-300 hover:text-purple-400 px-3 py-2 rounded-md text-sm font-semibold transition duration-300">Experience</a>
+                <a href="#apps" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-semibold transition duration-300">Apps</a>
+                <a href="#cs-projects" class="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-semibold transition duration-300">CS Projects</a>
+                <a href="#design-portfolio" class="text-gray-300 hover:text-purple-400 px-3 py-2 rounded-md text-sm font-semibold transition duration-300">Design</a>
+                <a href="blog.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-semibold transition duration-300">Blog</a>
+                <a href="#contact" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition duration-300">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div id="three-canvas-container"></div>
+        <div id="hero-content-wrapper">
+            <div id="hero-main">
+                <div id="hero-text">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-4 reveal reveal-left gradient-text">
+                        Hi, I'm Your Name
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 mb-8 reveal reveal-left" style="transition-delay: 0.2s;">
+                        Creative Developer & Designer focused on building cool digital experiences.
+                    </p>
+                </div>
+                <img id="hero-photo"
+                     src="https://placehold.co/250x250/1f2937/e5e7eb?text=Your+Photo"
+                     alt="Your Name - Headshot"
+                     class="reveal reveal-right" style="transition-delay: 0.4s;"
+                     onerror="this.src='https://placehold.co/250x250/1f2937/e5e7eb?text=Photo'">
+            </div>
+            <a href="#about" class="scroll-down-arrow reveal reveal-up" style="transition-delay: 0.8s;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl font-bold mb-8 text-center reveal reveal-scale text-purple-400">About Me</h2>
+            <p class="text-lg text-gray-300 mb-6 reveal reveal-up" style="transition-delay: 0.2s;">
+                I'm a passionate college student deeply interested in the intersection of technology and design. I love building cool things, whether it's coding complex applications or crafting beautiful user interfaces. Currently studying [Your Major] at [Your University].
+            </p>
+            <p class="text-lg text-gray-300 reveal reveal-up" style="transition-delay: 0.4s;">
+                My goal is to leverage my skills in both computer science and design to create impactful and engaging digital experiences. I'm always eager to learn new technologies and explore creative possibilities. Let's build something amazing together!
+            </p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl font-bold mb-12 text-center reveal reveal-scale text-green-400">Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                <div class="reveal reveal-left">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-200">JavaScript / TypeScript</h3>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar" data-skill-level="90%">90%</div>
+                    </div>
+                </div>
+                 <div class="reveal reveal-right" style="transition-delay: 0.1s;">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-200">React / Next.js</h3>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar" style="background: linear-gradient(90deg, #a855f7, #ec4899);" data-skill-level="85%">85%</div>
+                    </div>
+                </div>
+                <div class="reveal reveal-left" style="transition-delay: 0.2s;">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-200">Python (Flask, Django)</h3>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar" style="background: linear-gradient(90deg, #22c55e, #facc15);" data-skill-level="75%">75%</div>
+                    </div>
+                </div>
+                 <div class="reveal reveal-right" style="transition-delay: 0.3s;">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-200">UI/UX Design (Figma)</h3>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar" style="background: linear-gradient(90deg, #ec4899, #f97316);" data-skill-level="80%">80%</div>
+                    </div>
+                </div>
+                 <div class="reveal reveal-left" style="transition-delay: 0.4s;">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-200">HTML / CSS / Tailwind</h3>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar" style="background: linear-gradient(90deg, #f97316, #3b82f6);" data-skill-level="95%">95%</div>
+                    </div>
+                </div>
+                 <div class="reveal reveal-right" style="transition-delay: 0.5s;">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-200">Node.js / Express</h3>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar" style="background: linear-gradient(90deg, #facc15, #22c55e);" data-skill-level="70%">70%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+         <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-16 text-center reveal reveal-scale text-purple-400">Experience</h2>
+            <div class="timeline">
+                <div class="timeline-container timeline-left reveal reveal-left">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-semibold mb-1 text-purple-300">Company/Organization Name</h3>
+                        <h4 class="text-lg font-medium mb-2 text-gray-300">Your Role (e.g., Intern, Volunteer)</h4>
+                        <p class="text-sm text-gray-500 mb-3">Dates (e.g., May 2024 - Aug 2024)</p>
+                        <p class="text-gray-400">Brief description of your responsibilities and accomplishments. Used technologies like React and Node.js to build features X and Y. Collaborated with team members on Z.</p>
+                    </div>
+                </div>
+                <div class="timeline-container timeline-right reveal reveal-right">
+                    <div class="timeline-content">
+                         <h3 class="text-xl font-semibold mb-1 text-purple-300">Another Company / Project</h3>
+                        <h4 class="text-lg font-medium mb-2 text-gray-300">Position Title</h4>
+                        <p class="text-sm text-gray-500 mb-3">Dates (e.g., Jan 2023 - Present)</p>
+                        <p class="text-gray-400">Description of another experience. Focused on UI design using Figma, conducted user testing, and improved user flow for feature A.</p>
+                    </div>
+                </div>
+                 <div class="timeline-container timeline-left reveal reveal-left">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-semibold mb-1 text-purple-300">University Club / Course Project</h3>
+                        <h4 class="text-lg font-medium mb-2 text-gray-300">Role (e.g., Project Lead, Member)</h4>
+                        <p class="text-sm text-gray-500 mb-3">Dates (e.g., Fall 2023)</p>
+                        <p class="text-gray-400">Developed a Python application for [purpose]. Implemented [specific algorithm/feature]. Presented findings to [audience].</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="apps">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center reveal reveal-scale text-green-400">Apps & Extensions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card app-card reveal reveal-left">
+                    <img src="https://placehold.co/600x400/1f2937/9ca3af?text=App+1+Icon" alt="App 1 Placeholder" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
+                    <h3 class="text-2xl font-semibold mb-2 text-white">Cool Chrome Extension</h3>
+                    <p class="text-gray-400 mb-4">Description of the extension, what it does, maybe link to Chrome Web Store.</p>
+                    <a href="#" class="text-green-400 hover:text-green-300 font-medium">View on Store &rarr;</a>
+                </div>
+                <div class="card app-card reveal reveal-up" style="transition-delay: 0.2s;">
+                     <img src="https://placehold.co/600x400/1f2937/9ca3af?text=App+2+Icon" alt="App 2 Placeholder" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
+                    <h3 class="text-2xl font-semibold mb-2 text-white">Simple Web App</h3>
+                    <p class="text-gray-400 mb-4">Description of a standalone web application, its purpose, and tech stack.</p>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 font-medium">View Code &rarr;</a>
+                    <a href="#" class="ml-4 text-green-400 hover:text-green-300 font-medium">Live Demo &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cs-projects">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center reveal reveal-scale text-blue-400">CS Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card cs-card reveal reveal-left">
+                    <img src="https://placehold.co/600x400/1f2937/9ca3af?text=Project+1+Screenshot" alt="Project 1 Placeholder" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
+                    <h3 class="text-2xl font-semibold mb-2 text-white">Project Title 1</h3>
+                    <p class="text-gray-400 mb-4">Brief description of the project, technologies used (e.g., Python, React, Node.js).</p>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 font-medium">View Code &rarr;</a>
+                    <a href="#" class="ml-4 text-green-400 hover:text-green-300 font-medium">Live Demo &rarr;</a>
+                </div>
+                <div class="card cs-card reveal reveal-up" style="transition-delay: 0.2s;">
+                     <img src="https://placehold.co/600x400/1f2937/9ca3af?text=Project+2+Screenshot" alt="Project 2 Placeholder" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
+                    <h3 class="text-2xl font-semibold mb-2 text-white">Project Title 2</h3>
+                    <p class="text-gray-400 mb-4">Another project description, highlighting key features and challenges.</p>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 font-medium">View Code &rarr;</a>
+                </div>
+                <div class="card cs-card reveal reveal-right" style="transition-delay: 0.4s;">
+                     <img src="https://placehold.co/600x400/1f2937/9ca3af?text=Project+3+Screenshot" alt="Project 3 Placeholder" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
+                    <h3 class="text-2xl font-semibold mb-2 text-white">Project Title 3</h3>
+                    <p class="text-gray-400 mb-4">Description focusing on algorithms, data structures, or specific CS concepts.</p>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 font-medium">View Code &rarr;</a>
+                    <a href="#" class="ml-4 text-green-400 hover:text-green-300 font-medium">Live Demo &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="design-portfolio">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center reveal reveal-scale text-purple-400">Design Portfolio</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card design-card reveal reveal-left">
+                    <img src="https://placehold.co/600x400/1f2937/9ca3af?text=Design+1+Visual" alt="Design 1 Placeholder" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
+                    <h3 class="text-2xl font-semibold mb-2 text-white">Design Project 1</h3>
+                    <p class="text-gray-400 mb-4">Description focusing on design process, tools (e.g., Figma, Adobe XD), and goals.</p>
+                    <a href="#" class="text-purple-400 hover:text-purple-300 font-medium">View Project &rarr;</a>
+                </div>
+                <div class="card design-card reveal reveal-up" style="transition-delay: 0.2s;">
+                    <img src="https://placehold.co/600x400/1f2937/9ca3af?text=Design+2+Visual" alt="Design 2 Placeholder" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
+                    <h3 class="text-2xl font-semibold mb-2 text-white">Design Project 2</h3>
+                    <p class="text-gray-400 mb-4">Highlighting UI/UX considerations, user research, or branding aspects.</p>
+                    <a href="#" class="text-purple-400 hover:text-purple-300 font-medium">View Project &rarr;</a>
+                </div>
+                <div class="card design-card reveal reveal-right" style="transition-delay: 0.4s;">
+                    <img src="https://placehold.co/600x400/1f2937/9ca3af?text=Design+3+Visual" alt="Design 3 Placeholder" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
+                    <h3 class="text-2xl font-semibold mb-2 text-white">Design Project 3</h3>
+                    <p class="text-gray-400 mb-4">Focus on visual design, illustrations, or motion graphics.</p>
+                    <a href="#" class="text-purple-400 hover:text-purple-300 font-medium">View Project &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h2 class="text-4xl font-bold mb-8 reveal reveal-scale text-green-400">Blog / Writings</h2>
+            <p class="text-lg text-center text-gray-400 mb-10 reveal reveal-up" style="transition-delay: 0.2s;">
+                Sharing thoughts on tech, design, and the journey of learning.
+            </p>
+            <a href="blog.html" class="reveal reveal-up inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-full transition duration-300 shadow-lg hover:shadow-green-500/50" style="transition-delay: 0.4s;">
+                Visit the Blog
+            </a>
+            </div>
+    </section>
+
+    <section id="contact">
+        <div class="container mx-auto max-w-2xl text-center">
+            <h2 class="text-4xl font-bold mb-6 reveal reveal-scale gradient-text">Get In Touch</h2>
+            <p class="text-lg text-gray-400 mb-8 reveal reveal-up" style="transition-delay: 0.2s;">
+                Interested in collaborating or just want to say hi? Reach out!
+            </p>
+            <a href="mailto:your.email@example.com" class="reveal reveal-up inline-block bg-gradient-to-r from-blue-500 via-purple-500 to-green-500 text-white font-semibold py-3 px-8 rounded-full hover:opacity-90 transition duration-300 shadow-lg hover:shadow-purple-500/50" style="transition-delay: 0.4s;">
+                Send me an Email
+            </a>
+             <div class="mt-12 flex justify-center space-x-6 reveal reveal-up" style="transition-delay: 0.6s;">
+                <a href="#" class="text-gray-400 hover:text-blue-400 transition duration-300">LinkedIn</a>
+                <a href="#" class="text-gray-400 hover:text-purple-400 transition duration-300">GitHub</a>
+                <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Twitter / X</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center p-6 text-gray-500 text-sm">
+        &copy; 2025 Your Name. Built with HTML, Tailwind CSS, Three.js, and JS.
+    </footer>
+
+
+    <script>
+        let scene, camera, renderer, points, linesMesh, mouseX = 0, mouseY = 0;
+        const container = document.getElementById('three-canvas-container');
+        let windowHalfX = window.innerWidth / 2;
+        let windowHalfY = window.innerHeight / 2;
+        let animationFrameId = null;
+
+        const PARTICLE_COUNT = window.innerWidth < 768 ? 35 : 50;
+        const MAX_DISTANCE = 80;
+        const PARTICLE_SPEED = 0.03;
+        const EDGE_BIAS_RADIUS = 90;
+
+        let particleVelocities = [];
+        let particlesGeometry, pointsMaterial, lineGeometry, lineMaterial;
+
+        function initThreeJS() {
+            try {
+                scene = new THREE.Scene();
+                camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+                camera.position.set(0, 0, 160);
+
+                renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                renderer.setSize(container.clientWidth, container.clientHeight);
+                renderer.setPixelRatio(window.devicePixelRatio);
+                container.innerHTML = '';
+                container.appendChild(renderer.domElement);
+
+                if (points) { scene.remove(points); points.geometry.dispose(); points.material.dispose(); points = null; }
+                if (linesMesh) { scene.remove(linesMesh); linesMesh.geometry.dispose(); linesMesh.material.dispose(); linesMesh = null; }
+
+                const positions = new Float32Array(PARTICLE_COUNT * 3);
+                const colors = new Float32Array(PARTICLE_COUNT * 3);
+                const color = new THREE.Color();
+                const baseColors = [0x3b82f6, 0xa855f7, 0x22c55e];
+                particleVelocities = [];
+
+                for (let i = 0; i < PARTICLE_COUNT; i++) {
+                    const i3 = i * 3;
+                    let x, y, z;
+                    do {
+                        const spread = 170;
+                        x = (Math.random() - 0.5) * spread;
+                        y = (Math.random() - 0.5) * spread;
+                        z = (Math.random() - 0.5) * spread;
+                    } while (Math.sqrt(x*x + y*y + z*z) < EDGE_BIAS_RADIUS);
+                    positions[i3] = x; positions[i3 + 1] = y; positions[i3 + 2] = z;
+                    color.setHex(baseColors[Math.floor(Math.random() * baseColors.length)]);
+                    colors[i3] = color.r; colors[i3 + 1] = color.g; colors[i3 + 2] = color.b;
+                    particleVelocities.push(new THREE.Vector3((Math.random()-0.5)*PARTICLE_SPEED, (Math.random()-0.5)*PARTICLE_SPEED, (Math.random()-0.5)*PARTICLE_SPEED));
+                }
+
+                particlesGeometry = new THREE.BufferGeometry();
+                particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3).setUsage(THREE.DynamicDrawUsage));
+                particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+                pointsMaterial = new THREE.PointsMaterial({ size: 2.0, vertexColors: true, blending: THREE.AdditiveBlending, transparent: true, opacity: 0.7, depthWrite: false });
+                points = new THREE.Points(particlesGeometry, pointsMaterial);
+                scene.add(points);
+
+                const maxLineVertices = PARTICLE_COUNT * (PARTICLE_COUNT - 1) * 3;
+                const linePositions = new Float32Array(maxLineVertices);
+                lineGeometry = new THREE.BufferGeometry();
+                lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3).setUsage(THREE.DynamicDrawUsage));
+                lineMaterial = new THREE.LineBasicMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.2, blending: THREE.AdditiveBlending, depthWrite: false });
+                linesMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
+                scene.add(linesMesh);
+
+                window.removeEventListener('resize', onWindowResize);
+                document.removeEventListener('mousemove', onDocumentMouseMove);
+                window.addEventListener('resize', onWindowResize, false);
+                document.addEventListener('mousemove', onDocumentMouseMove, false);
+
+                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                animateThreeJS();
+
+            } catch (error) { console.error("Error initializing Three.js:", error); if (container) container.style.display = 'none'; }
+        }
+
+        function onWindowResize() {
+             windowHalfX = window.innerWidth / 2; windowHalfY = window.innerHeight / 2;
+            if (camera && renderer && container) { camera.aspect = container.clientWidth / container.clientHeight; camera.updateProjectionMatrix(); renderer.setSize(container.clientWidth, container.clientHeight); }
+        }
+
+        function onDocumentMouseMove(event) { mouseX = (event.clientX - windowHalfX) / windowHalfX; mouseY = (event.clientY - windowHalfY) / windowHalfY; }
+
+        function animateThreeJS() {
+            animationFrameId = requestAnimationFrame(animateThreeJS);
+            if (!points?.geometry?.attributes?.position || !linesMesh?.geometry?.attributes?.position || !particleVelocities || particleVelocities.length !== PARTICLE_COUNT) return;
+
+            const positions = points.geometry.attributes.position.array;
+            const linePositions = linesMesh.geometry.attributes.position.array;
+            let vertexPos = 0; let lineCount = 0;
+            const maxVerticesInLineBuffer = linePositions.length;
+
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                const i3 = i * 3; if (!particleVelocities[i]) continue;
+                positions[i3] += particleVelocities[i].x; positions[i3 + 1] += particleVelocities[i].y; positions[i3 + 2] += particleVelocities[i].z;
+                const bounds = 160;
+                if (positions[i3] < -bounds || positions[i3] > bounds) particleVelocities[i].x *= -1;
+                if (positions[i3 + 1] < -bounds || positions[i3 + 1] > bounds) particleVelocities[i].y *= -1;
+                if (positions[i3 + 2] < -bounds || positions[i3 + 2] > bounds) particleVelocities[i].z *= -1;
+
+                for (let j = i + 1; j < PARTICLE_COUNT; j++) {
+                     const j3 = j * 3; const dx = positions[i3] - positions[j3]; const dy = positions[i3 + 1] - positions[j3 + 1]; const dz = positions[i3 + 2] - positions[j3 + 2];
+                     const distSq = dx * dx + dy * dy + dz * dz;
+                     if (distSq < MAX_DISTANCE * MAX_DISTANCE) {
+                         if (vertexPos < maxVerticesInLineBuffer - 6) {
+                             linePositions[vertexPos++] = positions[i3]; linePositions[vertexPos++] = positions[i3 + 1]; linePositions[vertexPos++] = positions[i3 + 2];
+                             linePositions[vertexPos++] = positions[j3]; linePositions[vertexPos++] = positions[j3 + 1]; linePositions[vertexPos++] = positions[j3 + 2];
+                             lineCount++;
+                         } else { break; }
+                     }
+                }
+                 if (vertexPos >= maxVerticesInLineBuffer - 6) break;
+            }
+
+            points.geometry.attributes.position.needsUpdate = true;
+            linesMesh.geometry.attributes.position.needsUpdate = true;
+            linesMesh.geometry.setDrawRange(0, lineCount * 2);
+
+            if(camera) { const targetX = mouseX * 40; const targetY = -mouseY * 40; camera.position.x += (targetX - camera.position.x) * 0.01; camera.position.y += (targetY - camera.position.y) * 0.01; camera.lookAt(scene.position); }
+            if(renderer && scene && camera) { renderer.render(scene, camera); }
+        }
+
+         window.onload = function() { if (container) { initThreeJS(); } else { console.error("Three.js container not found."); } };
+
+        const observer = new IntersectionObserver((entries, observerInstance) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    const skillBar = entry.target.querySelector('.skill-bar');
+                    if (skillBar) {
+                        skillBar.style.width = skillBar.getAttribute('data-skill-level');
+                    }
+                } else {
+                    entry.target.classList.remove('visible');
+                    const skillBar = entry.target.querySelector('.skill-bar');
+                     if (skillBar) {
+                         skillBar.style.width = '0%';
+                     }
+                }
+            });
+        }, {
+            threshold: 0.2,
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    const headerOffset = document.querySelector('header')?.offsetHeight || 70;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
