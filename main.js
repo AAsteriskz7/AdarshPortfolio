@@ -5,9 +5,9 @@ let windowHalfY = window.innerHeight / 2;
 let animationFrameId = null;
 
 const PARTICLE_COUNT = window.innerWidth < 768 ? 35 : 50;
-const MAX_DISTANCE = 60;
+const MAX_DISTANCE = 90; //connection size between particles
 const PARTICLE_SPEED = 0.02;
-const EDGE_BIAS_RADIUS = 90;
+const EDGE_BIAS_RADIUS = 110; //keeps particles so they are not too close the center
 
 let particleVelocities = [];
 let particlesGeometry, pointsMaterial, lineGeometry, lineMaterial;
@@ -16,7 +16,7 @@ function initThreeJS() {
     try {
         scene = new THREE.Scene();
         camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-        camera.position.set(0, 0, 160);
+        camera.position.set(0, 0, 220);
 
         renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
@@ -37,7 +37,7 @@ function initThreeJS() {
             const i3 = i * 3;
             let x, y, z;
             do {
-                const spread = 170;
+                const spread = 300;
                 x = (Math.random() - 0.5) * spread;
                 y = (Math.random() - 0.5) * spread;
                 z = (Math.random() - 0.5) * spread;
@@ -100,7 +100,7 @@ function animateThreeJS() {
     for (let i = 0; i < PARTICLE_COUNT; i++) {
         const i3 = i * 3; if (!particleVelocities[i]) continue;
         positions[i3] += particleVelocities[i].x; positions[i3 + 1] += particleVelocities[i].y; positions[i3 + 2] += particleVelocities[i].z;
-        const bounds = 160;
+        const bounds = 290;
         if (positions[i3] < -bounds || positions[i3] > bounds) particleVelocities[i].x *= -1;
         if (positions[i3 + 1] < -bounds || positions[i3 + 1] > bounds) particleVelocities[i].y *= -1;
         if (positions[i3 + 2] < -bounds || positions[i3 + 2] > bounds) particleVelocities[i].z *= -1;
