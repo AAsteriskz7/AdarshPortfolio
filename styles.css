@@ -18,6 +18,12 @@ body {
 .reveal-scale { transform: scale(0.9); }
 .reveal.visible { opacity: 1; transform: translate(0, 0) scale(1); }
 
+/* this was to center the arrow. the reveal visible class is overriding the transform. */
+.scroll-down-arrow.reveal.visible { 
+    opacity: 1; 
+    transform: translateX(-50%) scale(1);
+}
+
 .gradient-text {
     background: linear-gradient(45deg, #3b82f6, #a855f7, #22c55e);
     -webkit-background-clip: text;
@@ -192,7 +198,7 @@ section {
     position: absolute;
     width: 25px;
     height: 25px;
-    right: -17px;
+    right: -12.5px;
     background: linear-gradient(45deg, #3b82f6, #a855f7);
     border: 4px solid #1f2937;
     top: 15px;
@@ -225,7 +231,10 @@ section {
     border-width: 10px 10px 10px 0;
     border-color: transparent #4b5563 transparent transparent;
 }
-.timeline-right::after { left: -16px; }
+.timeline-right::after {
+    left: -12.5px;
+    right: auto; 
+}
 .timeline-content {
     padding: 20px 30px;
     background-color: #1f2937;
@@ -245,6 +254,6 @@ section {
     .timeline::after { left: 31px; }
     .timeline-container { width: 100%; padding-left: 70px; padding-right: 25px; }
     .timeline-container::before { left: 60px; border: medium solid #4b5563; border-width: 10px 10px 10px 0; border-color: transparent #4b5563 transparent transparent; }
-    .timeline-left::after, .timeline-right::after { left: 15px; }
+    .timeline-left::after, .timeline-right::after { left: 18.5px; }
     .timeline-right { left: 0%; }
 }
