@@ -41,12 +41,13 @@
             background-color: #1f2937;
             border-radius: 0.75rem;
             padding: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Added border-color transition */
             border: 1px solid #374151;
         }
         .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px); /* Slightly more lift */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4); /* More pronounced shadow */
+            border-color: #60a5fa; /* Change border color on hover */
         }
         .tool-card a {
             color: #60a5fa;
@@ -56,8 +57,11 @@
             color: #3b82f6;
         }
         header {
-            background-color: rgba(17, 24, 39, 0.7);
+            /* Subtle gradient: from a slightly lighter shade of the body's dark gray to a slightly darker one */
+            background: linear-gradient(180deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.85) 100%);
             backdrop-filter: blur(8px);
+            /* Adding a more distinct border */
+            border-bottom: 1px solid #4b5563; /* Slightly more prominent border */
         }
         footer {
             background-color: #111827;
@@ -70,9 +74,9 @@
     <div id="three-canvas-container"></div>
 
     <div class="content-wrapper">
-        <header class="sticky top-0 z-50 py-4 border-b border-gray-700">
-            <div class="container mx-auto px-4 flex justify-between items-center">
-                <h1 class="text-xl font-bold text-gray-200">My Favorite Tools & Resources</h1>
+        <header class="sticky top-0 z-50 py-6 border-b border-gray-700"> {/* Increased py-padding */}
+            <div class="container mx-auto px-6 flex justify-between items-center"> {/* Increased px-padding */}
+                <h1 class="text-3xl font-bold text-gray-100">My Favorite Tools & Resources</h1> {/* Increased font size and slightly lighter text */}
                 <a href="index.html" class="text-sm font-semibold text-blue-400 hover:text-blue-300 transition duration-300">&larr; Back to Portfolio</a>
             </div>
         </header>
@@ -81,36 +85,159 @@
             <p class="text-lg text-center text-gray-400 mb-12">
                 A curated list of websites, tools, and resources I find useful or interesting.
             </p>
+
+            <!-- CS Tools Section -->
+            <h2 class="text-2xl font-semibold text-gray-200 mb-6 mt-12">CS Tools</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="tool-card">
-                    <h2 class="text-xl font-semibold mb-2 text-white">Figma</h2>
-                    <p class="text-gray-400 mb-3">Collaborative interface design tool.</p>
-                    <a href="https://www.figma.com/" target="_blank" rel="noopener noreferrer">Visit Figma &rarr;</a>
-                </div>
-                <div class="tool-card">
+                    {/* Icon Placeholder */}
+                    <div class="w-10 h-10 bg-gray-500 rounded-full mb-4 flex items-center justify-center text-white opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    </div>
                     <h2 class="text-xl font-semibold mb-2 text-white">Tailwind CSS</h2>
                     <p class="text-gray-400 mb-3">A utility-first CSS framework.</p>
                     <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer">Visit Tailwind CSS &rarr;</a>
                 </div>
                  <div class="tool-card">
+                    {/* Icon Placeholder */}
+                    <div class="w-10 h-10 bg-gray-500 rounded-full mb-4 flex items-center justify-center text-white opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    </div>
                     <h2 class="text-xl font-semibold mb-2 text-white">Three.js</h2>
                     <p class="text-gray-400 mb-3">JavaScript 3D library.</p>
                     <a href="https://threejs.org/" target="_blank" rel="noopener noreferrer">Visit Three.js &rarr;</a>
                 </div>
                  <div class="tool-card">
+                    {/* Icon Placeholder */}
+                    <div class="w-10 h-10 bg-gray-500 rounded-full mb-4 flex items-center justify-center text-white opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    </div>
                     <h2 class="text-xl font-semibold mb-2 text-white">MDN Web Docs</h2>
                     <p class="text-gray-400 mb-3">Essential resource for web developers.</p>
                     <a href="https://developer.mozilla.org/" target="_blank" rel="noopener noreferrer">Visit MDN &rarr;</a>
                 </div>
                  <div class="tool-card">
+                    {/* Icon Placeholder */}
+                    <div class="w-10 h-10 bg-gray-500 rounded-full mb-4 flex items-center justify-center text-white opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    </div>
+                    <h2 class="text-xl font-semibold mb-2 text-white">GitHub</h2>
+                    <p class="text-gray-400 mb-3">Code hosting platform.</p>
+                    <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Visit GitHub &rarr;</a>
+                </div>
+                <div class="tool-card">
+                    {/* Icon Placeholder */}
+                    <div class="w-10 h-10 bg-gray-500 rounded-full mb-4 flex items-center justify-center text-white opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    </div>
+                    <h2 class="text-xl font-semibold mb-2 text-white">ChatGPT</h2>
+                    <p class="text-gray-400 mb-3">AI language model by OpenAI.</p>
+                    <a href="https://chat.openai.com" target="_blank" rel="noopener noreferrer">Visit ChatGPT &rarr;</a>
+                </div>
+                <div class="tool-card">
+                    {/* Icon Placeholder */}
+                    <div class="w-10 h-10 bg-gray-500 rounded-full mb-4 flex items-center justify-center text-white opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    </div>
+                    <h2 class="text-xl font-semibold mb-2 text-white">Gemini</h2>
+                    <p class="text-gray-400 mb-3">AI assistant by Google.</p>
+                    <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">Visit Gemini &rarr;</a>
+                </div>
+                <div class="tool-card">
+                    {/* Icon Placeholder */}
+                    <div class="w-10 h-10 bg-gray-500 rounded-full mb-4 flex items-center justify-center text-white opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    </div>
+                    <h2 class="text-xl font-semibold mb-2 text-white">v0.dev</h2>
+                    <p class="text-gray-400 mb-3">AI-powered UI generator by Vercel.</p>
+                    <a href="https://v0.dev" target="_blank" rel="noopener noreferrer">Visit v0.dev &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Design Tools Section -->
+            <h2 class="text-2xl font-semibold text-gray-200 mb-6 mt-12">Design Tools</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="tool-card">
+                    {/* Icon Placeholder */}
+                    <div class="w-10 h-10 bg-gray-500 rounded-full mb-4 flex items-center justify-center text-white opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    </div>
+                    <h2 class="text-xl font-semibold mb-2 text-white">Figma</h2>
+                    <p class="text-gray-400 mb-3">Collaborative interface design tool.</p>
+                    <a href="https://www.figma.com/" target="_blank" rel="noopener noreferrer">Visit Figma &rarr;</a>
+                </div>
+                <div class="tool-card">
+                    {/* Icon Placeholder */}
+                    <div class="w-10 h-10 bg-gray-500 rounded-full mb-4 flex items-center justify-center text-white opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    </div>
                     <h2 class="text-xl font-semibold mb-2 text-white">Coolors</h2>
                     <p class="text-gray-400 mb-3">Fast color palette generator.</p>
                     <a href="https://coolors.co/" target="_blank" rel="noopener noreferrer">Visit Coolors &rarr;</a>
                 </div>
-                 <div class="tool-card">
-                    <h2 class="text-xl font-semibold mb-2 text-white">GitHub</h2>
-                    <p class="text-gray-400 mb-3">Code hosting platform.</p>
-                    <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Visit GitHub &rarr;</a>
+                <div class="tool-card">
+                    {/* Icon Placeholder */}
+                    <div class="w-10 h-10 bg-gray-500 rounded-full mb-4 flex items-center justify-center text-white opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    </div>
+                    <h2 class="text-xl font-semibold mb-2 text-white">Pixlr</h2>
+                    <p class="text-gray-400 mb-3">Online photo editor.</p>
+                    <a href="https://pixlr.com" target="_blank" rel="noopener noreferrer">Visit Pixlr &rarr;</a>
+                </div>
+                <div class="tool-card">
+                    {/* Icon Placeholder */}
+                    <div class="w-10 h-10 bg-gray-500 rounded-full mb-4 flex items-center justify-center text-white opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    </div>
+                    <h2 class="text-xl font-semibold mb-2 text-white">Photopea</h2>
+                    <p class="text-gray-400 mb-3">Advanced online image editor.</p>
+                    <a href="https://photopea.com" target="_blank" rel="noopener noreferrer">Visit Photopea &rarr;</a>
+                </div>
+            </div>
+
+            <!-- General/Other Section -->
+            <h2 class="text-2xl font-semibold text-gray-200 mb-6 mt-12">General/Other</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="tool-card">
+                    {/* Icon Placeholder */}
+                    <div class="w-10 h-10 bg-gray-500 rounded-full mb-4 flex items-center justify-center text-white opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    </div>
+                    <h2 class="text-xl font-semibold mb-2 text-white">Canva</h2>
+                    <p class="text-gray-400 mb-3">Easy-to-use online design platform.</p>
+                    <a href="https://www.canva.com/" target="_blank" rel="noopener noreferrer">Visit Canva &rarr;</a>
+                </div>
+                <div class="tool-card">
+                    {/* Icon Placeholder */}
+                    <div class="w-10 h-10 bg-gray-500 rounded-full mb-4 flex items-center justify-center text-white opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    </div>
+                    <h2 class="text-xl font-semibold mb-2 text-white">TinyPNG</h2>
+                    <p class="text-gray-400 mb-3">Smart PNG and JPEG compression.</p>
+                    <a href="https://tinypng.com/" target="_blank" rel="noopener noreferrer">Visit TinyPNG &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Fun Section -->
+            <h2 class="text-2xl font-semibold text-gray-200 mb-6 mt-12">Fun</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="tool-card">
+                    {/* Icon Placeholder */}
+                    <div class="w-10 h-10 bg-gray-500 rounded-full mb-4 flex items-center justify-center text-white opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    </div>
+                    <h2 class="text-xl font-semibold mb-2 text-white">Slow Roads</h2>
+                    <p class="text-gray-400 mb-3">A relaxing, endless driving game.</p>
+                    <a href="https://slowroads.io" target="_blank" rel="noopener noreferrer">Visit Slow Roads &rarr;</a>
+                </div>
+                <div class="tool-card">
+                    {/* Icon Placeholder */}
+                    <div class="w-10 h-10 bg-gray-500 rounded-full mb-4 flex items-center justify-center text-white opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    </div>
+                    <h2 class="text-xl font-semibold mb-2 text-white">Neal Fun</h2>
+                    <p class="text-gray-400 mb-3">A collection of fun web experiments.</p>
+                    <a href="https://neal.fun" target="_blank" rel="noopener noreferrer">Visit Neal Fun &rarr;</a>
                 </div>
             </div>
         </main>
