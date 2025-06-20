@@ -1,3 +1,6 @@
+gsap.registerPlugin(TextPlugin);
+gsap.registerPlugin(ScrollTrigger);
+
 let scene, camera, renderer, points, linesMesh, mouseX = 0, mouseY = 0;
 const container = document.getElementById('three-canvas-container');
 let windowHalfX = window.innerWidth / 2;
@@ -129,30 +132,6 @@ function animateThreeJS() {
 
  window.onload = function() { if (container) { initThreeJS(); } else { console.error("Three.js container not found."); } };
 
-const observer = new IntersectionObserver((entries, observerInstance) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            const skillBar = entry.target.querySelector('.skill-bar');
-            if (skillBar) {
-                skillBar.style.width = skillBar.getAttribute('data-skill-level');
-            }
-        } else {
-            entry.target.classList.remove('visible');
-            const skillBar = entry.target.querySelector('.skill-bar');
-             if (skillBar) {
-                 skillBar.style.width = '0%';
-             }
-        }
-    });
-}, {
-    threshold: 0.2,
-});
-
-document.querySelectorAll('.reveal').forEach(el => {
-    observer.observe(el);
-});
-
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -164,5 +143,341 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
             window.scrollTo({ top: offsetPosition, behavior: "smooth" });
         }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const heroHeading = document.querySelector('#hero-text h1');
+    const heroSubheading = document.querySelector('#hero-text p');
+    const heroPhoto = document.getElementById('hero-photo');
+    const scrollArrow = document.querySelector('.scroll-down-arrow');
+
+    // Hero Text and Arrow Animations
+    if (heroHeading && heroSubheading) {
+        const headingText = heroHeading.textContent.trim();
+        heroHeading.textContent = ''; // Clear heading for typewriter
+
+        const subheadingText = heroSubheading.textContent.trim();
+        heroSubheading.textContent = ''; // Clear subheading for word animation
+        const subheadingWords = subheadingText.split(' ');
+
+        subheadingWords.forEach(word => {
+            const span = document.createElement('span');
+            span.textContent = word + ' ';
+            span.style.display = 'inline-block'; // Necessary for y transform
+            heroSubheading.appendChild(span);
+        });
+
+        const tl = gsap.timeline();
+
+        // Set initial state for heading (already cleared)
+        // 1. Typewriter for Heading
+        tl.to(heroHeading, {
+            text: headingText,
+            duration: 1.5,
+            ease: "power1.inOut",
+        });
+
+        // 2. Staggered Reveal for Subheading
+        const subheadingSpans = heroSubheading.querySelectorAll('span');
+        gsap.set(subheadingSpans, { opacity: 0, y: 20 }); // Initial state for spans
+
+        tl.to(subheadingSpans, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power1.out",
+        }, "-=0.5"); // Start slightly before the heading finishes for a smoother transition
+
+        // 3. Scroll-Down Arrow Animation (added to the main timeline)
+        if (scrollArrow) {
+            tl.fromTo(scrollArrow,
+                { opacity: 0, y: 0, scale: 0.8 },
+                {
+                    opacity: 1,
+                    y: -10,
+                    scale: 1.05,
+                    duration: 1.2,
+                    ease: "sine.inOut",
+                    repeat: -1,
+                    yoyo: true
+                },
+            ">"); // Start after previous animations complete
+        }
+
+    } else {
+        console.error('Hero text elements not found for animation.');
+    }
+
+    // Hero Photo Animations
+    if (heroPhoto) {
+        // Initial State
+        gsap.set(heroPhoto, { opacity: 0, scale: 0.8 });
+
+        // Scroll-Triggered Animation
+        gsap.to(heroPhoto, {
+            opacity: 1,
+            scale: 1,
+            ease: "power1.out",
+            scrollTrigger: {
+                trigger: "#hero",
+                start: "top 70%", // A bit earlier to ensure it's visible as user scrolls
+                end: "bottom center",
+                scrub: 1,
+                // markers: true, // Uncomment for debugging
+            }
+        });
+
+        // Mouse Interaction
+        window.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const xPercent = (clientX / window.innerWidth - 0.5) * 2; // -1 to 1
+            const yPercent = (clientY / window.innerHeight - 0.5) * 2; // -1 to 1
+
+            gsap.to(heroPhoto, {
+                rotationY: xPercent * 5, // Max 5 degrees
+                rotationX: -yPercent * 5, // Max 5 degrees
+                duration: 0.7,
+                ease: "power1.out",
+                overwrite: 'auto'
+            });
+        });
+    } else {
+        console.error('Hero photo element not found for animation.');
+    }
+
+    // Section Title Animations (h2 elements)
+    const sectionTitles = gsap.utils.toArray('section > h2');
+    sectionTitles.forEach(title => {
+        const originalText = title.textContent;
+        title.textContent = ''; // Clear existing text
+        const chars = originalText.split('');
+
+        chars.forEach(char => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.style.display = 'inline-block'; // Allows transform
+            if (char === ' ') { // Handle spaces for layout
+                span.style.minWidth = '0.25em';
+            }
+            title.appendChild(span);
+        });
+
+        const charSpans = title.querySelectorAll('span');
+        gsap.set(charSpans, { opacity: 0, x: -20 });
+
+        gsap.to(charSpans, {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            stagger: 0.03,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: title,
+                start: 'top 85%',
+                // markers: true, // for debugging
+            }
+        });
+    });
+
+    // Helper function for staggered list animations
+    function animateStaggeredList(elementsOrSelector, triggerSelector, staggerAmount = 0.2, yOffset = 30, start = "top 80%", xOffset = 0) {
+        const elements = gsap.utils.toArray(elementsOrSelector);
+        if (elements.length === 0) {
+            // console.warn(`No elements found for selector: ${elementsOrSelector} in animateStaggeredList`);
+            return;
+        }
+
+        gsap.set(elements, { opacity: 0, y: yOffset, x: xOffset });
+
+        gsap.to(elements, {
+            opacity: 1,
+            y: 0,
+            x: 0,
+            duration: 0.8, // Standardized duration, can be parameterized if needed
+            stagger: staggerAmount,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: triggerSelector || elements[0].parentNode, // Default to parent if no trigger specific
+                start: start,
+                // markers: true, // for debugging
+            }
+        });
+    }
+
+    // "About Me" Paragraph Animation (#about p)
+    animateStaggeredList('#about p', '#about');
+
+    // Skills Section Content Stagger (#skills .grid > div)
+    // These divs have reveal-left and reveal-right. We can use the helper to animate them from bottom,
+    // or create specific animations if we want to keep left/right reveal.
+    // For now, let's use a consistent y reveal.
+    animateStaggeredList('#skills .grid > div', '#skills .grid', 0.1);
+
+    // Extensions Section Cards Stagger (#apps .card)
+    animateStaggeredList('#apps .card', '#apps', 0.15);
+
+    // CS Projects Section Cards Stagger (#cs-projects .card)
+    animateStaggeredList('#cs-projects .card', '#cs-projects', 0.15);
+
+    // Skill Bar Animations
+    const skillBars = gsap.utils.toArray('.skill-bar');
+    skillBars.forEach(skillBar => {
+        const targetWidth = skillBar.dataset.skillLevel || "0%";
+        const targetPercentage = parseInt(targetWidth, 10); // Get numerical value for counter
+
+        gsap.set(skillBar, { width: "0%", opacity: 0 }); // Initial state
+
+        let counter = { value: 0 };
+
+        gsap.to(skillBar, {
+            width: targetWidth,
+            opacity: 1,
+            duration: 1.2,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: skillBar.parentElement, // Trigger based on the parent div
+                start: "center bottom", // Start when center of parent hits bottom of viewport
+                // markers: true, // for debugging
+                once: true, // Animate only once
+            },
+            onUpdate: function() {
+                // This onUpdate is for the skillBar tween itself, not ideal for counter
+            },
+            onComplete: function() {
+                 // Ensure final text is accurate, though counter should handle this too
+                skillBar.textContent = targetPercentage + '%';
+            }
+        });
+
+        // Separate tween for the counter, synced by the same ScrollTrigger logic essentially
+        // We want this to start when the skillBar's parent is triggered
+        gsap.to(counter, {
+            value: targetPercentage,
+            duration: 1.2, // Same duration as width animation
+            ease: 'power2.out', // Same ease
+            scrollTrigger: {
+                trigger: skillBar.parentElement,
+                start: "center bottom",
+                once: true,
+            },
+            onUpdate: function() {
+                skillBar.textContent = Math.round(counter.value) + '%';
+            }
+        });
+    });
+
+    // Interactive Hover Effect for Project/Extension Cards
+    const interactiveCards = gsap.utils.toArray('#apps .card, #cs-projects .card');
+    interactiveCards.forEach(card => {
+        gsap.set(card, { perspective: "1000px" }); // Set perspective for 3D effect
+
+        card.addEventListener('mouseenter', () => {
+            gsap.to(card, {
+                y: -8, // Lift up
+                rotationX: 2, // Tilt slightly
+                rotationY: 4, // Tilt slightly
+                scale: 1.02, // Slight scale to match original CSS hover
+                boxShadow: "0px 15px 25px rgba(0,0,0,0.2)", // Enhanced shadow
+                duration: 0.35,
+                ease: "power2.out",
+                overwrite: 'auto'
+            });
+        });
+
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                y: 0,
+                rotationX: 0,
+                rotationY: 0,
+                scale: 1.0, // Back to normal scale
+                boxShadow: "0px 5px 15px rgba(0,0,0,0.1)", // Resting shadow - adjust if needed
+                duration: 0.35,
+                ease: "power2.out",
+                overwrite: 'auto'
+            });
+        });
+    });
+
+    // Custom Mouse Cursor Trail Effect
+    const cursorDot = document.createElement('div');
+    cursorDot.id = 'cursor-dot';
+    document.body.appendChild(cursorDot);
+
+    const cursorTrail = document.createElement('div');
+    cursorTrail.id = 'cursor-dot-trail';
+    document.body.appendChild(cursorTrail);
+
+    gsap.set([cursorDot, cursorTrail], {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        xPercent: -50,
+        yPercent: -50,
+        opacity: 0,
+        scale: 0,
+        pointerEvents: 'none'
+    });
+
+    let isFirstMove = true;
+
+    window.addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
+
+        if (isFirstMove) {
+            gsap.to(cursorDot, {
+                x: clientX,
+                y: clientY,
+                opacity: 1,
+                scale: 1,
+                duration: 0.1,
+                ease: "power1.out"
+            });
+            gsap.to(cursorTrail, {
+                x: clientX,
+                y: clientY,
+                opacity: 0.4, // Trail less opaque
+                scale: 1,   // Trail starts at normal scale then CSS makes it bigger
+                duration: 0.3,
+                ease: "power1.out"
+            });
+            isFirstMove = false;
+        } else {
+            gsap.to(cursorDot, {
+                x: clientX,
+                y: clientY,
+                duration: 0.1,
+                ease: "power1.out"
+            });
+            gsap.to(cursorTrail, {
+                x: clientX,
+                y: clientY,
+                duration: 0.3, // Slower for trailing effect
+                ease: "power1.out"
+            });
+        }
+    });
+
+    window.addEventListener('mousedown', () => {
+        gsap.to(cursorDot, { scale: 1.5, duration: 0.15, ease: 'power1.out' });
+    });
+
+    window.addEventListener('mouseup', () => {
+        gsap.to(cursorDot, { scale: 1, duration: 0.15, ease: 'power1.out' });
+    });
+
+    document.body.addEventListener('mouseleave', () => {
+        gsap.to([cursorDot, cursorTrail], { opacity: 0, scale: 0, duration: 0.2, ease: 'power1.out' });
+        isFirstMove = true; // Reset for when mouse re-enters
+    });
+
+    document.body.addEventListener('mouseenter', (e) => {
+        // This event is mainly to handle re-entry after a mouseleave from body.
+        // The mousemove event will handle the actual positioning and fade-in.
+        // We can force an initial quick fade-in here if needed, but mousemove should cover it.
+         if (isFirstMove) { // If mouse left body and re-enters, treat as first move
+            gsap.to([cursorDot, cursorTrail], {opacity:0, scale:0, duration:0}); // instant hide if not already
+         }
     });
 });

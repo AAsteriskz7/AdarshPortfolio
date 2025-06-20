@@ -4,24 +4,31 @@ body {
     color: #e5e7eb;
     cursor: auto;
     overflow-x: hidden;
+    cursor: none; /* Hide default cursor */
 }
 
-/* Reveal Animations */
-.reveal {
-    opacity: 0;
-    transition: opacity 1s ease-out, transform 0.8s ease-out;
-    will-change: opacity, transform;
+/* Custom Cursor Styles */
+#cursor-dot, #cursor-dot-trail {
+    position: fixed; /* Already set by GSAP, but good for clarity */
+    border-radius: 50%;
+    pointer-events: none; /* Already set by GSAP */
+    /* transform: translate(-50%, -50%); /* Handled by GSAP xPercent/yPercent */
+    /* opacity: 0; scale: 0; /* Initial state handled by GSAP */
+    /* top:0; left:0; /* Handled by GSAP */
 }
-.reveal-up { transform: translateY(60px); }
-.reveal-left { transform: translateX(-60px); }
-.reveal-right { transform: translateX(60px); }
-.reveal-scale { transform: scale(0.9); }
-.reveal.visible { opacity: 1; transform: translate(0, 0) scale(1); }
 
-/* this was to center the arrow. the reveal visible class is overriding the transform. */
-.scroll-down-arrow.reveal.visible { 
-    opacity: 1; 
-    transform: translateX(-50%) scale(1);
+#cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #a855f7; /* Purple from theme */
+    z-index: 10000; /* Above trail */
+}
+
+#cursor-dot-trail {
+    width: 24px; /* Larger than dot */
+    height: 24px;
+    background-color: rgba(168, 85, 247, 0.3); /* Lighter, more transparent purple */
+    z-index: 9999; /* Below dot */
 }
 
 .gradient-text {
@@ -173,10 +180,10 @@ section {
     position: relative;
     overflow: hidden;
 }
-.card.cs-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 25px rgba(59, 130, 246, 0.25); border-color: #3b82f6; }
-.card.design-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 25px rgba(168, 85, 247, 0.25); border-color: #a855f7; }
-.card.app-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 25px rgba(34, 197, 94, 0.25); border-color: #22c55e; }
-.card.blog-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 25px rgba(34, 197, 94, 0.25); border-color: #22c55e; }
+.card.cs-card:hover { border-color: #3b82f6; }
+.card.design-card:hover { border-color: #a855f7; }
+.card.app-card:hover { border-color: #22c55e; }
+.card.blog-card:hover { border-color: #22c55e; }
 
 /* Skills */
 .skill-bar-container {

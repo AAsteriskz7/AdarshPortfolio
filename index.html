@@ -10,12 +10,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="antialiased">
 
-    <header class="fixed top-0 left-0 w-full p-4 z-50 bg-gray-900/70 backdrop-blur-md reveal reveal-up">
+    <header class="fixed top-0 left-0 w-full p-4 z-50 bg-gray-900/70 backdrop-blur-md">
         <nav class="container mx-auto flex justify-between items-center">
             <!-- Nav  -->
             <div class="text-xl font-bold text-blue-400">Adarsh Setty</div>
@@ -36,19 +39,19 @@
         <div id="hero-content-wrapper">
             <div id="hero-main">
                 <div id="hero-text">
-                    <h1 class="text-5xl md:text-7xl font-bold mb-4 reveal reveal-left gradient-text">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-4 gradient-text">
                         Hi, I'm Adarsh
                     </h1>
-                    <p class="text-xl md:text-2xl text-gray-300 mb-8 reveal reveal-left" style="transition-delay: 0.2s;">
+                    <p class="text-xl md:text-2xl text-gray-300 mb-8" style="transition-delay: 0.2s;">
                         Creative Developer & Designer focused on building cool digital experiences.
                     </p>
                 </div>
                 <img id="hero-photo"
                      src="assets\AdarshPhoto.jpeg"
                      alt="Adarsh - Headshot"
-                     class="reveal reveal-right" style="transition-delay: 0.4s;">
+                     class="" style="transition-delay: 0.4s;">
             </div>
-            <a href="#about" class="scroll-down-arrow reveal reveal-up" style="transition-delay: 0.8s;">
+            <a href="#about" class="scroll-down-arrow" style="transition-delay: 0.8s;">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
                 </svg>
@@ -58,13 +61,13 @@
 
     <section id="about">
         <div class="container mx-auto max-w-4xl">
-            <h2 class="text-4xl font-bold mb-8 text-center reveal reveal-scale text-purple-400">About Me</h2>
-            <p class="text-lg text-gray-300 mb-6 reveal reveal-up" style="transition-delay: 0.2s;">
+            <h2 class="text-4xl font-bold mb-8 text-center text-purple-400">About Me</h2>
+            <p class="text-lg text-gray-300 mb-6" style="transition-delay: 0.2s;">
                 I'm a passionate college student deeply interested in the intersection of technology and design. 
                 I love building cool things, whether it's coding complex applications or crafting beautiful user interfaces. 
                 Currently studying Computer Science at Georgia Institute of Technology.
             </p>
-            <p class="text-lg text-gray-300 reveal reveal-up" style="transition-delay: 0.4s;">
+            <p class="text-lg text-gray-300" style="transition-delay: 0.4s;">
                 My goal is to leverage my skills in both computer science and design to create impactful and engaging digital experiences and make life easier and better for everyone.
                 I'm always eager to learn new technologies and explore creative possibilities. Let's build something amazing together!
             </p>
@@ -73,10 +76,10 @@
 
     <section id="skills">
     <div class="container mx-auto max-w-4xl">
-        <h2 class="text-4xl font-bold mb-12 text-center reveal reveal-scale text-green-400">Skills</h2>
+        <h2 class="text-4xl font-bold mb-12 text-center text-green-400">Skills</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
             <!-- CS Skills -->
-            <div class="reveal reveal-left">
+            <div class="" style="transition-delay: 0s;">
                 <h3 class="text-xl font-semibold mb-2 text-gray-200">HTML / CSS</h3>
                 <div class="skill-bar-container">
                     <div class="skill-bar" data-skill-level="80%" style="width: 80%">80%</div>
@@ -84,7 +87,7 @@
             </div>
             
             <!--  Design Skills -->
-            <div class="reveal reveal-right" style="transition-delay: 0.1s;">
+            <div class="" style="transition-delay: 0.1s;">
                 <h3 class="text-xl font-semibold mb-2 text-gray-200">Graphic Design</h3>
                 <div class="skill-bar-container">
                     <div class="skill-bar" style="background: linear-gradient(90deg, #a855f7, #ec4899); width: 100%" data-skill-level="100%">100%</div>
@@ -92,7 +95,7 @@
             </div>
             
             <!-- CS Skills -->
-            <div class="reveal reveal-left" style="transition-delay: 0.2s;">
+            <div class="" style="transition-delay: 0.2s;">
                 <h3 class="text-xl font-semibold mb-2 text-gray-200">Python</h3>
                 <div class="skill-bar-container">
                     <div class="skill-bar" style="background: linear-gradient(90deg, #3b82f6, #22c55e); width: 100%" data-skill-level="100%">100%</div>
@@ -100,7 +103,7 @@
             </div>
             
             <!-- Design Skills -->
-            <div class="reveal reveal-right" style="transition-delay: 0.3s;">
+            <div class="" style="transition-delay: 0.3s;">
                 <h3 class="text-xl font-semibold mb-2 text-gray-200">UI/UX Design</h3>
                 <div class="skill-bar-container">
                     <div class="skill-bar" style="background: linear-gradient(90deg, #ec4899, #f97316); width: 100%" data-skill-level="100%">100%</div>
@@ -108,7 +111,7 @@
             </div>
             
             <!-- CS Skills -->
-            <div class="reveal reveal-left" style="transition-delay: 0.4s;">
+            <div class="" style="transition-delay: 0.4s;">
                 <h3 class="text-xl font-semibold mb-2 text-gray-200">Flutter</h3>
                 <div class="skill-bar-container">
                     <div class="skill-bar" style="background: linear-gradient(90deg, #3b82f6, #a855f7); width: 60%" data-skill-level="60%">60%</div>
@@ -116,7 +119,7 @@
             </div>
             
             <!-- Design Skills -->
-            <div class="reveal reveal-right" style="transition-delay: 0.5s;">
+            <div class="" style="transition-delay: 0.5s;">
                 <h3 class="text-xl font-semibold mb-2 text-gray-200">Figma</h3>
                 <div class="skill-bar-container">
                     <div class="skill-bar" style="background: linear-gradient(90deg, #a855f7, #ec4899); width: 90%" data-skill-level="90%">90%</div>
@@ -124,7 +127,7 @@
             </div>
             
             <!-- CS Skills -->
-            <div class="reveal reveal-left" style="transition-delay: 0.6s;">
+            <div class="" style="transition-delay: 0.6s;">
                 <h3 class="text-xl font-semibold mb-2 text-gray-200">Java</h3>
                 <div class="skill-bar-container">
                     <div class="skill-bar" style="background: linear-gradient(90deg, #22c55e, #f97316); width: 70%" data-skill-level="70%">70%</div>
@@ -132,7 +135,7 @@
             </div>
             
             <!-- Design Skills -->
-            <div class="reveal reveal-right" style="transition-delay: 0.7s;">
+            <div class="" style="transition-delay: 0.7s;">
                 <h3 class="text-xl font-semibold mb-2 text-gray-200">Davinci Resolve</h3>
                 <div class="skill-bar-container">
                     <div class="skill-bar" style="background: linear-gradient(90deg, #f97316, #facc15); width: 60%" data-skill-level="60%">60%</div>
@@ -140,7 +143,7 @@
             </div>
             
             <!-- CS Skills -->
-            <div class="reveal reveal-left" style="transition-delay: 0.8s;">
+            <div class="" style="transition-delay: 0.8s;">
                 <h3 class="text-xl font-semibold mb-2 text-gray-200">React</h3>
                 <div class="skill-bar-container">
                     <div class="skill-bar" style="background: linear-gradient(90deg, #3b82f6, #22c55e); width: 50%" data-skill-level="50%">50%</div>
@@ -148,7 +151,7 @@
             </div>
             
             <!-- Design Skills -->
-            <div class="reveal reveal-right" style="transition-delay: 0.9s;">
+            <div class="" style="transition-delay: 0.9s;">
                 <h3 class="text-xl font-semibold mb-2 text-gray-200">Canva</h3>
                 <div class="skill-bar-container">
                     <div class="skill-bar" style="background: linear-gradient(90deg, #ec4899, #a855f7); width: 100%" data-skill-level="100%">100%</div>
@@ -156,7 +159,7 @@
             </div>
             
             <!-- CS Skills -->
-            <div class="reveal reveal-left" style="transition-delay: 1.0s;">
+            <div class="" style="transition-delay: 1.0s;">
                 <h3 class="text-xl font-semibold mb-2 text-gray-200">JavaScript</h3>
                 <div class="skill-bar-container">
                     <div class="skill-bar" style="background: linear-gradient(90deg, #eab308, #f97316); width: 50%" data-skill-level="50%">50%</div>
@@ -164,7 +167,7 @@
             </div>
             
             <!-- Design Skills -->
-            <div class="reveal reveal-right" style="transition-delay: 1.1s;">
+            <div class="" style="transition-delay: 1.1s;">
                 <h3 class="text-xl font-semibold mb-2 text-gray-200">Pixlr</h3>
                 <div class="skill-bar-container">
                     <div class="skill-bar" style="background: linear-gradient(90deg, #a855f7, #3b82f6); width: 100%" data-skill-level="100%">100%</div>
@@ -176,9 +179,9 @@
     <!--
     <section id="experience">
          <div class="container mx-auto">
-            <h2 class="text-4xl font-bold mb-16 text-center reveal reveal-scale text-purple-400">Experience</h2>
+            <h2 class="text-4xl font-bold mb-16 text-center text-purple-400">Experience</h2>
             <div class="timeline">
-                <div class="timeline-container timeline-left reveal reveal-left">
+                <div class="timeline-container timeline-left">
                     <div class="timeline-content">
                         <h3 class="text-xl font-semibold mb-1 text-purple-300">Marketing Lead at Classify</h3>
                         <h4 class="text-lg font-medium mb-2 text-gray-300">Your Role (e.g., Intern, Volunteer)</h4>
@@ -186,7 +189,7 @@
                         <p class="text-gray-400">Brief description of your responsibilities and accomplishments. Used technologies like React and Node.js to build features X and Y. Collaborated with team members on Z.</p>
                     </div>
                 </div>
-                <div class="timeline-container timeline-right reveal reveal-right">
+                <div class="timeline-container timeline-right">
                     <div class="timeline-content">
                          <h3 class="text-xl font-semibold mb-1 text-purple-300">Another Company / Project</h3>
                         <h4 class="text-lg font-medium mb-2 text-gray-300">Position Title</h4>
@@ -194,7 +197,7 @@
                         <p class="text-gray-400">Description of another experience. Focused on UI design using Figma, conducted user testing, and improved user flow for feature A.</p>
                     </div>
                 </div>
-                 <div class="timeline-container timeline-left reveal reveal-left">
+                 <div class="timeline-container timeline-left">
                     <div class="timeline-content">
                         <h3 class="text-xl font-semibold mb-1 text-purple-300">University Club / Course Project</h3>
                         <h4 class="text-lg font-medium mb-2 text-gray-300">Role (e.g., Project Lead, Member)</h4>
@@ -208,21 +211,21 @@
     -->
     <section id="apps">
         <div class="container mx-auto">
-            <h2 class="text-4xl font-bold mb-12 text-center reveal reveal-scale text-green-400">Extensions</h2>
+            <h2 class="text-4xl font-bold mb-12 text-center text-green-400">Extensions</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="card app-card reveal reveal-left">
+                <div class="card app-card" style="transition-delay: 0s;">
                     <img src="https://placehold.co/600x400/1f2937/9ca3af?text=QuantumGuard+Icon" alt="QuantumGuard Extension" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
                     <h3 class="text-2xl font-semibold mb-2 text-white">QuantumGuard Password Generator</h3>
                     <p class="text-gray-400 mb-4">Privacy-first browser extension that generates quantum-resistant passphrases using the EFF Diceware wordlist. Features client-side generation with cryptographically secure randomness for maximum security.</p>
                     <a href="#" class="text-green-400 hover:text-green-300 font-medium">View on Chrome Store &rarr;</a>
                 </div>
-                <div class="card app-card reveal reveal-up" style="transition-delay: 0.2s;">
+                <div class="card app-card" style="transition-delay: 0.2s;">
                     <img src="https://placehold.co/600x400/1f2937/9ca3af?text=GoalTube+Icon" alt="GoalTube Extension" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
                     <h3 class="text-2xl font-semibold mb-2 text-white">GoalTube</h3>
                     <p class="text-gray-400 mb-4">Transform YouTube into a productivity tool by replacing your homepage with curated videos from categories like self-improvement, entrepreneurship, and AI. Stay focused and intentional with your viewing.</p>
                     <a href="#" class="text-green-400 hover:text-green-300 font-medium">View on Chrome Store &rarr;</a>
                 </div>
-                <div class="card app-card reveal reveal-right" style="transition-delay: 0.4s;">
+                <div class="card app-card" style="transition-delay: 0.4s;">
                     <img src="https://placehold.co/600x400/1f2937/9ca3af?text=AI+Geoguesser+Icon" alt="AI Geoguesser Extension" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
                     <h3 class="text-2xl font-semibold mb-2 text-white">AI Geoguesser Guesser</h3>
                     <p class="text-gray-400 mb-4">AI-powered location guesser that uses the Gemini API to analyze screenshots and predict geographic locations. Perfect for GeoGuessr and other location-based guessing games.</p>
@@ -235,16 +238,16 @@
     <!--
     <section id="apps">
         <div class="container mx-auto">
-            <h2 class="text-4xl font-bold mb-12 text-center reveal reveal-scale text-blue-400">Apps</h2>
+            <h2 class="text-4xl font-bold mb-12 text-center text-blue-400">Apps</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="card app-card reveal reveal-left">
+                <div class="card app-card">
                     <img src="https://placehold.co/600x400/1f2937/9ca3af?text=App+1+Icon" alt="App 1 Placeholder" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
                     <h3 class="text-2xl font-semibold mb-2 text-white">Mobile App 1</h3>
                     <p class="text-gray-400 mb-4">Description of your mobile application, its features, and tech stack.</p>
                     <a href="#" class="text-blue-400 hover:text-blue-300 font-medium">View on App Store &rarr;</a>
                     <a href="#" class="ml-4 text-green-400 hover:text-green-300 font-medium">View on Play Store &rarr;</a>
                 </div>
-                <div class="card app-card reveal reveal-up" style="transition-delay: 0.2s;">
+                <div class="card app-card" style="transition-delay: 0.2s;">
                     <img src="https://placehold.co/600x400/1f2937/9ca3af?text=App+2+Icon" alt="App 2 Placeholder" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
                     <h3 class="text-2xl font-semibold mb-2 text-white">Web App 2</h3>
                     <p class="text-gray-400 mb-4">Description of your web application, key features, and impact.</p>
@@ -258,29 +261,29 @@
 
     <section id="cs-projects">
         <div class="container mx-auto">
-            <h2 class="text-4xl font-bold mb-12 text-center reveal reveal-scale text-blue-400">CS Projects</h2>
+            <h2 class="text-4xl font-bold mb-12 text-center text-blue-400">CS Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="card cs-card reveal reveal-left">
+                <div class="card cs-card" style="transition-delay: 0s;">
                     <img src="https://placehold.co/600x400/1f2937/9ca3af?text=DigitalTwin+Screenshot" alt="DigitalTwin Project" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
                     <h3 class="text-2xl font-semibold mb-2 text-white">DigitalTwin 🏆</h3>
                     <p class="text-gray-400 mb-4">First Place Winner at Ramblin' Hacks 2025. ML-powered health simulation that predicts biological aging based on lifestyle choices. Built with React, TypeScript, Flask, and XGBoost on NHANES dataset.</p>
                     <a href="https://devpost.com/software/digitaltwin" class="text-blue-400 hover:text-blue-300 font-medium">View Project &rarr;</a>
                     <a href="#" class="ml-4 text-green-400 hover:text-green-300 font-medium">Live Demo &rarr;</a>
                 </div>
-                <div class="card cs-card reveal reveal-up" style="transition-delay: 0.2s;">
+                <div class="card cs-card" style="transition-delay: 0.2s;">
                     <img src="https://placehold.co/600x400/1f2937/9ca3af?text=WattsTheMatter+Screenshot" alt="WattsTheMatter Project" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
                     <h3 class="text-2xl font-semibold mb-2 text-white">WattsTheMatter 🏆</h3>
                     <p class="text-gray-400 mb-4">Best Overall Hack Winner at EnergyHack@GT. Predicts ML model energy consumption and carbon emissions before training. Features AST analysis, React frontend, and Flask backend.</p>
                     <a href="https://devpost.com/software/wattsthematter" class="text-blue-400 hover:text-blue-300 font-medium">View Project &rarr;</a>
                     <a href="#" class="ml-4 text-green-400 hover:text-green-300 font-medium">Live Demo &rarr;</a>
                 </div>
-                <div class="card cs-card reveal reveal-right" style="transition-delay: 0.4s;">
+                <div class="card cs-card" style="transition-delay: 0.4s;">
                     <img src="https://placehold.co/600x400/1f2937/9ca3af?text=LLMuminate+Screenshot" alt="LLMuminate Project" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
                     <h3 class="text-2xl font-semibold mb-2 text-white">LLMuminate</h3>
                     <p class="text-gray-400 mb-4">Chrome extension that fact-checks AI responses against peer-reviewed sources like PubMed. Provides similarity scores and factual comparisons to combat the 52% inaccuracy rate in ChatGPT responses.</p>
                     <a href="https://github.com/AAsteriskz7/LLMuminate.ai" class="text-blue-400 hover:text-blue-300 font-medium">View Code &rarr;</a>
                 </div>
-                <div class="card cs-card reveal reveal-left" style="transition-delay: 0.6s;">
+                <div class="card cs-card" style="transition-delay: 0.6s;">
                     <img src="https://placehold.co/600x400/1f2937/9ca3af?text=OncoBot+Screenshot" alt="OncoBot Project" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
                     <h3 class="text-2xl font-semibold mb-2 text-white">Onco-Bot 🏆</h3>
                     <p class="text-gray-400 mb-4">Third Place Winner at HackGT 11. AI-powered skin cancer detection using computer vision and OpenCV. Analyzes skin lesions for melanoma signs and integrates Google Maps to find nearby hospitals.</p>
@@ -293,21 +296,21 @@
     <!--
     <section id="design-portfolio">
         <div class="container mx-auto">
-            <h2 class="text-4xl font-bold mb-12 text-center reveal reveal-scale text-purple-400">Design Portfolio</h2>
+            <h2 class="text-4xl font-bold mb-12 text-center text-purple-400">Design Portfolio</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="card design-card reveal reveal-left">
+                <div class="card design-card">
                     <img src="https://placehold.co/600x400/1f2937/9ca3af?text=Design+1+Visual" alt="Design 1 Placeholder" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
                     <h3 class="text-2xl font-semibold mb-2 text-white">Design Project 1</h3>
                     <p class="text-gray-400 mb-4">Description focusing on design process, tools (e.g., Figma, Adobe XD), and goals.</p>
                     <a href="#" class="text-purple-400 hover:text-purple-300 font-medium">View Project &rarr;</a>
                 </div>
-                <div class="card design-card reveal reveal-up" style="transition-delay: 0.2s;">
+                <div class="card design-card" style="transition-delay: 0.2s;">
                     <img src="https://placehold.co/600x400/1f2937/9ca3af?text=Design+2+Visual" alt="Design 2 Placeholder" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
                     <h3 class="text-2xl font-semibold mb-2 text-white">Design Project 2</h3>
                     <p class="text-gray-400 mb-4">Highlighting UI/UX considerations, user research, or branding aspects.</p>
                     <a href="#" class="text-purple-400 hover:text-purple-300 font-medium">View Project &rarr;</a>
                 </div>
-                <div class="card design-card reveal reveal-right" style="transition-delay: 0.4s;">
+                <div class="card design-card" style="transition-delay: 0.4s;">
                     <img src="https://placehold.co/600x400/1f2937/9ca3af?text=Design+3+Visual" alt="Design 3 Placeholder" class="rounded-lg mb-4 w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Error'">
                     <h3 class="text-2xl font-semibold mb-2 text-white">Design Project 3</h3>
                     <p class="text-gray-400 mb-4">Focus on visual design, illustrations, or motion graphics.</p>
@@ -320,14 +323,14 @@
 
     <section id="contact">
         <div class="container mx-auto max-w-2xl text-center">
-            <h2 class="text-4xl font-bold mb-6 reveal reveal-scale gradient-text">Get In Touch</h2>
-            <p class="text-lg text-gray-400 mb-8 reveal reveal-up" style="transition-delay: 0.2s;">
+            <h2 class="text-4xl font-bold mb-6 gradient-text">Get In Touch</h2>
+            <p class="text-lg text-gray-400 mb-8" style="transition-delay: 0.2s;">
                 Interested in collaborating or just want to say hi? Reach out!
             </p>
-            <a href="mailto:adarshsetty1@gmail.com" class="reveal reveal-up inline-block bg-gradient-to-r from-blue-500 via-purple-500 to-green-500 text-white font-semibold py-3 px-8 rounded-full hover:opacity-90 transition duration-300 shadow-lg hover:shadow-purple-500/50" style="transition-delay: 0.4s;">
+            <a href="mailto:adarshsetty1@gmail.com" class="inline-block bg-gradient-to-r from-blue-500 via-purple-500 to-green-500 text-white font-semibold py-3 px-8 rounded-full hover:opacity-90 transition duration-300 shadow-lg hover:shadow-purple-500/50" style="transition-delay: 0.4s;">
                 Send me an Email
             </a>
-             <div class="mt-12 flex justify-center space-x-6 reveal reveal-up" style="transition-delay: 0.6s;">
+             <div class="mt-12 flex justify-center space-x-6" style="transition-delay: 0.6s;">
                 <a href="https://www.linkedin.com/in/adarshsetty/" class="text-gray-400 hover:text-blue-400 transition duration-300">LinkedIn</a>
                 <a href="https://github.com/AAsteriskz7" class="text-gray-400 hover:text-purple-400 transition duration-300">GitHub</a>
                 <a href="https://x.com/aasteriskz" class="text-gray-400 hover:text-green-400 transition duration-300">Twitter / X</a>
