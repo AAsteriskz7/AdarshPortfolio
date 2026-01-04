@@ -13,7 +13,9 @@ import {
   Twitter,
   Puzzle,
   Award,
-  Trophy
+  Trophy,
+  Download,
+  BookOpen
 } from 'lucide-react';
 
 const Block = ({ children, className = "", color = "bg-white", noHover = false }: { children: React.ReactNode, className?: string, color?: string, noHover?: boolean }) => (
@@ -48,25 +50,29 @@ export default function Home() {
       company: "Georgia Tech Office of Information Technology",
       role: "Web Developer",
       period: "Sep 2025 - Present",
-      description: "Developing and maintaining official institutional websites using HTML5, CSS3, JavaScript, React, and CMS platforms. Ensuring accessibility compliance (WCAG), optimizing performance, and collaborating with stakeholders to create responsive digital experiences."
+      description: "Developing and maintaining official institutional websites using HTML5, CSS3, JavaScript, React, and CMS platforms. Ensuring accessibility compliance (WCAG), optimizing performance, and collaborating with stakeholders to create responsive digital experiences.",
+      skills: ["React", "Drupal", "WCAG", "SEO"]
     },
     {
       company: "SlatePath",
       role: "Founder, Chief Technology Officer",
       period: "Aug 2025 - Present",
-      description: "Leading the technical vision of an AI-powered student success platform. Architecting scalable infrastructure and developing full-stack solutions using React, Node.js, and Python to provide personalized learning experiences and academic planning."
+      description: "Leading the technical vision of an AI-powered student success platform. Architecting scalable infrastructure and developing full-stack solutions using React, Node.js, and Python to provide personalized learning experiences and academic planning.",
+      skills: ["React", "Node.js", "Python", "AWS", "AI/ML"]
     },
     {
       company: "Autonomous & Connected Transportation Lab",
       role: "Undergraduate Researcher",
       period: "Aug 2025 - Present",
-      description: "Analyzing eye-tracking data to understand driver reactions to autonomous vehicles. Developing Python scripts for attention map visualization and presenting findings on human behavior in mixed-traffic scenarios."
+      description: "Analyzing eye-tracking data to understand driver reactions to autonomous vehicles. Developing Python scripts for attention map visualization and presenting findings on human behavior in mixed-traffic scenarios.",
+      skills: ["Python", "Data Analysis", "Computer Vision"]
     },
     {
       company: "LumaDent, Inc.",
       role: "Software Engineer Intern",
       period: "May 2025 - Jul 2025",
-      description: "Engineered internal apps using LLMs and developed high-precision computer vision models (YOLO, OpenCV) for object detection. Spearheaded full-stack development of a web app using React, Node.js, and PostgreSQL, and executed comprehensive QA strategies for software and hardware."
+      description: "Engineered internal apps using LLMs and developed high-precision computer vision models (YOLO, OpenCV) for object detection. Spearheaded full-stack development of a web app using React, Node.js, and PostgreSQL, and executed comprehensive QA strategies for software and hardware.",
+      skills: ["YOLOv8", "OpenCV", "React", "PostgreSQL", "LLMs"]
     }
   ];
 
@@ -191,6 +197,9 @@ export default function Home() {
             <a href="mailto:adarshsetty1@gmail.com" className="p-3 border-2 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-zinc-100 active:translate-y-1 active:shadow-none transition-all">
               <Mail size={24} />
             </a>
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-3 border-2 border-black bg-yellow-300 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-yellow-400 active:translate-y-1 active:shadow-none transition-all font-black uppercase text-sm">
+              <Download size={20} /> Resume
+            </a>
           </div>
         </Block>
         
@@ -219,16 +228,24 @@ export default function Home() {
                       <span className="font-black text-xs bg-black text-white px-3 py-1 rounded-full uppercase tracking-widest mt-2 md:mt-0">{exp.period}</span>
                     </div>
                     <p className="font-bold text-zinc-500 mb-3 italic">{exp.company}</p>
-                    <p className="text-zinc-700 leading-relaxed">{exp.description}</p>
+                    <p className="text-zinc-700 leading-relaxed mb-4">{exp.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {exp.skills.map(skill => (
+                        <span key={skill} className="text-[10px] font-black uppercase border border-black px-2 py-0.5 bg-zinc-100 rounded-sm">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>
             </Block>
           </section>
 
-          {/* Skills Section */}
-          <section className="md:col-span-4">
-            <Block color="bg-purple-200" className="h-full">
+          {/* Right Column: Skills, Learning, Education */}
+          <section className="md:col-span-4 space-y-8">
+            {/* Tech Stack */}
+            <Block color="bg-purple-200">
               <h2 className="text-2xl font-black uppercase mb-6 flex items-center gap-3">
                 <Cpu size={24} strokeWidth={3} /> Tech Stack
               </h2>
@@ -236,6 +253,41 @@ export default function Home() {
                 {skills.map(skill => (
                   <Badge key={skill}>{skill}</Badge>
                 ))}
+              </div>
+            </Block>
+
+            {/* Currently Learning */}
+            <Block color="bg-blue-200">
+              <h2 className="text-2xl font-black uppercase mb-6 flex items-center gap-3">
+                <BookOpen size={24} strokeWidth={3} /> Learning
+              </h2>
+              <div className="space-y-4">
+                <div>
+                  <p className="font-black text-sm uppercase">Rust</p>
+                  <div className="w-full bg-white border-2 border-black h-3 mt-1 rounded-full overflow-hidden">
+                    <div className="bg-black h-full w-[40%]"></div>
+                  </div>
+                </div>
+                <div>
+                  <p className="font-black text-sm uppercase">System Design</p>
+                  <div className="w-full bg-white border-2 border-black h-3 mt-1 rounded-full overflow-hidden">
+                    <div className="bg-black h-full w-[65%]"></div>
+                  </div>
+                </div>
+              </div>
+            </Block>
+
+            {/* Education (Moved) */}
+            <Block color="bg-orange-200">
+              <h2 className="text-2xl font-black uppercase mb-4 flex items-center gap-3">
+                <GraduationCap size={24} strokeWidth={3} /> Education
+              </h2>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-xl font-black">B.S. in Computer Science</p>
+                  <p className="font-bold text-zinc-600 uppercase text-sm tracking-wide">Georgia Institute of Technology</p>
+                  <p className="text-xs font-bold mt-2">Concentrations: Intelligence & Media</p>
+                </div>
               </div>
             </Block>
           </section>
@@ -379,18 +431,6 @@ export default function Home() {
 
         {/* Bottom Info Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Block color="bg-orange-200">
-            <h2 className="text-2xl font-black uppercase mb-4 flex items-center gap-3">
-              <GraduationCap size={24} strokeWidth={3} /> Education
-            </h2>
-            <div className="space-y-4">
-              <div>
-                <p className="text-xl font-black">B.S. in Computer Science</p>
-                <p className="font-bold text-zinc-600 uppercase text-sm tracking-wide">Georgia Institute of Technology</p>
-              </div>
-            </div>
-          </Block>
-
           <Block color="bg-green-200">
             <h2 className="text-2xl font-black uppercase mb-4 flex items-center gap-3">
               <Globe size={24} strokeWidth={3} /> Languages
