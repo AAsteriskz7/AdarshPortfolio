@@ -45,10 +45,28 @@ export default function Home() {
 
   const experiences = [
     {
-      company: "Georgia Institute of Technology",
-      role: "Computer Science Student",
-      period: "Present",
-      description: "Passionate college student deeply interested in the intersection of technology and design. Building cool things, whether it's coding complex applications or crafting beautiful user interfaces."
+      company: "Georgia Tech Office of Information Technology",
+      role: "Web Developer",
+      period: "Sep 2025 - Present",
+      description: "Developing and maintaining official institutional websites using HTML5, CSS3, JavaScript, React, and CMS platforms. Ensuring accessibility compliance (WCAG), optimizing performance, and collaborating with stakeholders to create responsive digital experiences."
+    },
+    {
+      company: "SlatePath",
+      role: "Founder, Chief Technology Officer",
+      period: "Aug 2025 - Present",
+      description: "Leading the technical vision of an AI-powered student success platform. Architecting scalable infrastructure and developing full-stack solutions using React, Node.js, and Python to provide personalized learning experiences and academic planning."
+    },
+    {
+      company: "Autonomous & Connected Transportation Lab",
+      role: "Undergraduate Researcher",
+      period: "Aug 2025 - Present",
+      description: "Analyzing eye-tracking data to understand driver reactions to autonomous vehicles. Developing Python scripts for attention map visualization and presenting findings on human behavior in mixed-traffic scenarios."
+    },
+    {
+      company: "LumaDent, Inc.",
+      role: "Software Engineer Intern",
+      period: "May 2025 - Jul 2025",
+      description: "Engineered internal apps using LLMs and developed high-precision computer vision models (YOLO, OpenCV) for object detection. Spearheaded full-stack development of a web app using React, Node.js, and PostgreSQL, and executed comprehensive QA strategies for software and hardware."
     }
   ];
 
