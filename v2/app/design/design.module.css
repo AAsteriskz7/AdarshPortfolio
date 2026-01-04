@@ -1,0 +1,17 @@
+.container {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: 'Helvetica Neue', sans-serif;
+  min-height: 100vh;
+  padding: 4rem;
+}
+
+.header {
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-weight: 300;
+  letter-spacing: -1px;
+  font-size: 3rem;
+}

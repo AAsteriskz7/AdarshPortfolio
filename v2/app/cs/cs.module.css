@@ -1,0 +1,17 @@
+.container {
+  background-color: #0d1117; /* GitHub Dark Dimmed */
+  color: #c9d1d9;
+  font-family: 'Courier New', Courier, monospace;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.header {
+  border-bottom: 1px solid #30363d;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.title {
+  color: #58a6ff;
+}

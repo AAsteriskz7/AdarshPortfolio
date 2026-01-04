@@ -1,0 +1,32 @@
+.container {
+  background-color: #ffffff;
+  color: #202124;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10vh;
+  width: 100%;
+  max-width: 600px;
+}
+
+.logo {
+  font-size: 5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
