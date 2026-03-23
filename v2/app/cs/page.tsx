@@ -1,11 +1,11 @@
 import React from 'react';
-import { 
-  Github, 
-  Linkedin, 
-  Mail, 
-  ExternalLink, 
-  Briefcase, 
-  Cpu, 
+import {
+  Github,
+  Linkedin,
+  Mail,
+  ExternalLink,
+  Briefcase,
+  Cpu,
   GraduationCap,
   Terminal,
   Globe,
@@ -40,8 +40,8 @@ const Badge = ({ children }: { children: React.ReactNode }) => (
 
 export default function CSPage() {
   const skills = [
-    "React", "Python", "Java", "JavaScript", "TypeScript", 
-    "HTML/CSS", "Flutter", "Figma", "UI/UX Design", 
+    "React", "Python", "Java", "JavaScript", "TypeScript",
+    "HTML/CSS", "Flutter", "Figma", "UI/UX Design",
     "Graphic Design", "Davinci Resolve", "Canva"
   ];
 
@@ -157,7 +157,7 @@ export default function CSPage() {
 
   return (
     <div className="min-h-screen bg-[#F0F0F0] text-black font-sans selection:bg-yellow-300">
-      
+
       {/* 1. LANDING PAGE / HERO SECTION */}
       <section className="min-h-screen flex flex-col items-center justify-center p-6 md:p-12">
         <Block color="bg-white" className="max-w-6xl w-full text-center md:text-left py-16 md:py-24 relative overflow-hidden" noHover>
@@ -166,14 +166,14 @@ export default function CSPage() {
             <span className="w-3 h-3 rounded-full bg-yellow-400 border border-black"></span>
             <span className="w-3 h-3 rounded-full bg-green-400 border border-black"></span>
           </div>
-          
+
           <h1 className="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none mb-4">
             Adarsh Setty
           </h1>
           <p className="text-xl md:text-3xl font-bold text-zinc-600 mb-8 uppercase tracking-tight">
             Creative Developer & Designer
           </p>
-          
+
           <div className="flex flex-col md:flex-row md:items-center gap-6 mb-12">
             <div className="flex items-center gap-2 font-black text-sm uppercase bg-yellow-300 border-2 border-black px-4 py-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse border border-black"></span>
@@ -202,7 +202,7 @@ export default function CSPage() {
             </a>
           </div>
         </Block>
-        
+
         <div className="mt-12 animate-bounce flex flex-col items-center gap-2 opacity-50 font-black uppercase text-xs">
           <span>Scroll Down</span>
           <ArrowDown size={20} />
@@ -211,7 +211,7 @@ export default function CSPage() {
 
       {/* 2. SCROLL CONTENT AREA */}
       <div className="max-w-6xl mx-auto px-6 pb-24 space-y-12">
-        
+
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Experience Section */}
           <section className="md:col-span-8">
@@ -299,13 +299,13 @@ export default function CSPage() {
             <h2 className="text-3xl font-black uppercase whitespace-nowrap">Extensions & Apps</h2>
             <div className="h-[4px] w-full bg-black"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {extensions.map((project, idx) => (
               <Block key={idx} className="flex flex-col group h-full">
                 <div className="aspect-[4/3] bg-zinc-200 border-[3px] border-black mb-6 flex items-center justify-center overflow-hidden relative">
-                   <Puzzle className="text-black/20 group-hover:scale-110 transition-transform duration-500" size={64} />
-                   <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <Puzzle className="text-black/20 group-hover:scale-110 transition-transform duration-500" size={64} />
+                  <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
                 <h3 className="text-2xl font-black mb-3 flex items-center justify-between">
                   {project.title}
@@ -337,13 +337,13 @@ export default function CSPage() {
             <h2 className="text-3xl font-black uppercase whitespace-nowrap">CS Projects</h2>
             <div className="h-[4px] w-full bg-black"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {csProjects.map((project, idx) => (
               <Block key={idx} className="flex flex-col group h-full">
                 <div className="aspect-[4/3] bg-zinc-200 border-[3px] border-black mb-6 flex items-center justify-center overflow-hidden relative">
-                   <Terminal className="text-black/20 group-hover:scale-110 transition-transform duration-500" size={64} />
-                   <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <Terminal className="text-black/20 group-hover:scale-110 transition-transform duration-500" size={64} />
+                  <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
                 <h3 className="text-2xl font-black mb-3 flex items-center justify-between">
                   {project.title}
@@ -375,21 +375,21 @@ export default function CSPage() {
             <h2 className="text-3xl font-black uppercase whitespace-nowrap">Awards & Honors</h2>
             <div className="h-[4px] w-full bg-black"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {awards.map((award, idx) => (
               <Block key={idx} color="bg-pink-200" className="flex flex-col justify-between">
-                 <div>
-                    <div className="flex items-center gap-3 mb-4">
-                        <div className="p-2 bg-white border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                            <Trophy size={20} />
-                        </div>
-                        <span className="font-black text-xs uppercase tracking-widest">{award.event}</span>
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-white border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                      <Trophy size={20} />
                     </div>
-                    <h3 className="text-xl font-black mb-2">{award.title}</h3>
-                    <p className="font-bold text-zinc-600 text-sm mb-4">Project: {award.project}</p>
-                 </div>
-                 <p className="text-zinc-700 text-sm leading-relaxed">{award.desc}</p>
+                    <span className="font-black text-xs uppercase tracking-widest">{award.event}</span>
+                  </div>
+                  <h3 className="text-xl font-black mb-2">{award.title}</h3>
+                  <p className="font-bold text-zinc-600 text-sm mb-4">Project: {award.project}</p>
+                </div>
+                <p className="text-zinc-700 text-sm leading-relaxed">{award.desc}</p>
               </Block>
             ))}
           </div>
@@ -401,7 +401,7 @@ export default function CSPage() {
             <h2 className="text-3xl font-black uppercase whitespace-nowrap">Certifications</h2>
             <div className="h-[4px] w-full bg-black"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {certifications.map((cert, idx) => (
               <Block key={idx} color="bg-yellow-100" className="flex flex-col">
@@ -421,12 +421,12 @@ export default function CSPage() {
 
         {/* Contact Section */}
         <section>
-           <Block color="bg-blue-400" className="flex flex-col items-center justify-center text-center p-12">
-              <h3 className="text-2xl font-black mb-6 uppercase leading-tight">Got a project in mind?</h3>
-              <a href="mailto:adarshsetty1@gmail.com" className="group flex items-center gap-2 bg-white text-black px-8 py-4 border-[3px] border-black font-black uppercase tracking-tighter hover:bg-yellow-300 transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-1 active:translate-y-1">
-                LET'S TALK <Mail size={20} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-            </Block>
+          <Block color="bg-blue-400" className="flex flex-col items-center justify-center text-center p-12">
+            <h3 className="text-2xl font-black mb-6 uppercase leading-tight">Got a project in mind?</h3>
+            <a href="mailto:adarshsetty1@gmail.com" className="group flex items-center gap-2 bg-white text-black px-8 py-4 border-[3px] border-black font-black uppercase tracking-tighter hover:bg-yellow-300 transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-1 active:translate-y-1">
+              LET'S TALK <Mail size={20} className="group-hover:translate-x-1 transition-transform" />
+            </a>
+          </Block>
         </section>
 
         {/* Bottom Info Grid */}

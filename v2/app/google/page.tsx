@@ -20,7 +20,7 @@ export default function GooglePage() {
     if (isLogoHovered) {
       setTypedLetters([]); // Reset on new hover
       let currentIndex = 0;
-      
+
       // Start typing loop
       interval = setInterval(() => {
         // We look at currentIndex to see which letter to add next
@@ -46,33 +46,33 @@ export default function GooglePage() {
 
   const getTranslatedText = (key: 'search' | 'lucky' | 'ai' | 'offered') => {
     const translations: Record<Language, Record<string, string>> = {
-      'Normal': { 
-        search: 'Google Search', 
-        lucky: "I'm Feeling Lucky", 
+      'Normal': {
+        search: 'Google Search',
+        lucky: "I'm Feeling Lucky",
         ai: 'AI Mode',
         offered: 'Portfolio offered in:'
       },
-      'Python': { 
-        search: 'def search():', 
-        lucky: 'import random', 
+      'Python': {
+        search: 'def search():',
+        lucky: 'import random',
         ai: 'ai_mode = True',
         offered: 'print("Portfolio offered in:")'
       },
-      'JSON': { 
-        search: '"action": "search"', 
-        lucky: '"lucky": true', 
+      'JSON': {
+        search: '"action": "search"',
+        lucky: '"lucky": true',
         ai: '"aiMode": true',
         offered: '"offeredIn":'
       },
-      'Binary': { 
+      'Binary': {
         search: '01010011 01100101', // "Se" 
         lucky: '01001100 01110101', // "Lu"
         ai: '01000001 01001001', // "AI"
         offered: '01010000 01101111:' // "Po"
       },
-      'Assembly': { 
-        search: 'MOV EAX, SEARCH', 
-        lucky: 'JMP LUCKY', 
+      'Assembly': {
+        search: 'MOV EAX, SEARCH',
+        lucky: 'JMP LUCKY',
         ai: 'SET AI_FLAG',
         offered: 'SECTION .DATA'
       }
@@ -82,9 +82,9 @@ export default function GooglePage() {
 
   return (
     <div className="flex flex-col items-center w-full px-4 -mt-24">
-      
+
       {/* Logo */}
-      <div 
+      <div
         className="mb-[38px] select-none cursor-pointer h-[92px] flex items-center justify-center min-w-[300px]"
         onMouseEnter={() => setIsLogoHovered(true)}
         onMouseLeave={() => setIsLogoHovered(false)}
@@ -99,9 +99,9 @@ export default function GooglePage() {
             </span>
           </div>
         ) : (
-          <img 
-            src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" 
-            alt="Google" 
+          <img
+            src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+            alt="Google"
             height={92}
             width={272}
             className="h-[92px]"
@@ -112,19 +112,19 @@ export default function GooglePage() {
       {/* Search Bar */}
       <form onSubmit={handleSearch} className="w-full max-w-[584px] relative group">
         <div className="flex items-center w-full px-[14px] py-2.5 rounded-[24px] border border-[#dfe1e5] hover:shadow-[0_1px_6px_rgba(32,33,36,.28)] focus-within:shadow-[0_1px_6px_rgba(32,33,36,.28)] transition-shadow bg-white min-h-[46px]">
-          
+
           {/* Plus Icon (Left) */}
           <div className="pr-3 text-[#9aa0a6] cursor-pointer hover:text-[#3c4043]">
             <Plus size={20} />
           </div>
-          
-          <input 
-            type="text" 
+
+          <input
+            type="text"
             className="flex-grow outline-none text-[16px] text-[rgba(0,0,0,0.87)] font-normal"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          
+
           <div className="flex items-center gap-3 ml-3">
             {/* Mic Icon */}
             <div className="cursor-pointer" title="Search by voice">
@@ -135,7 +135,7 @@ export default function GooglePage() {
                 <path fill="#ea4335" d="m12 16.93a4.97 5.25 0 0 1 -3.54 -1.55l-1.41 1.41c1.26 1.32 3.03 2.13 4.95 2.13 3.87 0 6.99-2.92 6.99-7h-1.99c0 2.92-2.24 4.93-5 4.93z"></path>
               </svg>
             </div>
-            
+
             {/* Lens Icon */}
             <div className="cursor-pointer" title="Search by image">
               <svg className="Gdd5U" focusable="false" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
@@ -161,13 +161,13 @@ export default function GooglePage() {
 
       {/* Buttons */}
       <div className="mt-[29px] flex gap-3">
-        <button 
+        <button
           onClick={handleSearch}
           className="bg-[#f8f9fa] border border-[#f8f9fa] hover:border-[#dadce0] hover:shadow-[0_1px_1px_rgba(0,0,0,0.1)] px-[16px] h-[36px] rounded-[4px] text-[#3c4043] text-[14px] font-semibold transition-all min-w-[127px]"
         >
           {getTranslatedText('search')}
         </button>
-        <button 
+        <button
           className="bg-[#f8f9fa] border border-[#f8f9fa] hover:border-[#dadce0] hover:shadow-[0_1px_1px_rgba(0,0,0,0.1)] px-[16px] h-[36px] rounded-[4px] text-[#3c4043] text-[14px] font-semibold transition-all min-w-[127px]"
         >
           {getTranslatedText('lucky')}
@@ -176,15 +176,15 @@ export default function GooglePage() {
 
       {/* Language / Extra Text */}
       <div className="mt-[28px] text-[13px] text-[#3c4043]">
-        {getTranslatedText('offered')} 
+        {getTranslatedText('offered')}
         {['English', 'Python', 'JSON', 'Binary', 'Assembly'].map((lang) => (
-           <span 
-             key={lang}
-             className={`ml-2 cursor-pointer hover:underline ${language === (lang === 'English' ? 'Normal' : lang) ? 'font-bold text-[#202124]' : 'text-[#1a0dab]'}`}
-             onClick={() => setLanguage(lang === 'English' ? 'Normal' : lang as Language)}
-           >
-             {lang}
-           </span>
+          <span
+            key={lang}
+            className={`ml-2 cursor-pointer hover:underline ${language === (lang === 'English' ? 'Normal' : lang) ? 'font-bold text-[#202124]' : 'text-[#1a0dab]'}`}
+            onClick={() => setLanguage(lang === 'English' ? 'Normal' : lang as Language)}
+          >
+            {lang}
+          </span>
         ))}
       </div>
 

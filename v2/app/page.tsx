@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import { 
-  Github, 
-  Linkedin, 
-  Mail, 
+import {
+  Github,
+  Linkedin,
+  Mail,
   ArrowDown,
   Twitter,
   Download,
@@ -29,7 +29,7 @@ const Block = ({ children, className = "", color = "bg-white", noHover = false }
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#F0F0F0] text-black font-sans selection:bg-yellow-300">
-      
+
       {/* 1. LANDING PAGE / HERO SECTION */}
       <section className="min-h-screen flex flex-col items-center justify-center p-6 md:p-12">
         <Block color="bg-white" className="max-w-6xl w-full text-center md:text-left py-16 md:py-24 relative overflow-hidden" noHover>
@@ -38,14 +38,14 @@ export default function Home() {
             <span className="w-3 h-3 rounded-full bg-yellow-400 border border-black"></span>
             <span className="w-3 h-3 rounded-full bg-green-400 border border-black"></span>
           </div>
-          
+
           <h1 className="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none mb-4">
             Adarsh Setty
           </h1>
           <p className="text-xl md:text-3xl font-bold text-zinc-600 mb-8 uppercase tracking-tight">
             Creative Developer & Designer
           </p>
-          
+
           <div className="flex flex-col md:flex-row md:items-center gap-6 mb-12">
             <div className="flex items-center gap-2 font-black text-sm uppercase bg-yellow-300 border-2 border-black px-4 py-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse border border-black"></span>
@@ -74,7 +74,7 @@ export default function Home() {
             </a>
           </div>
         </Block>
-        
+
         <div className="mt-12 animate-bounce flex flex-col items-center gap-2 opacity-50 font-black uppercase text-xs">
           <span>Explore Worlds</span>
           <ArrowDown size={20} />
@@ -89,7 +89,7 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          
+
           {/* CS Portal */}
           <Link href="/cs" className="block h-full">
             <Block color="bg-green-200" className="h-full flex flex-col items-center text-center group cursor-pointer">
