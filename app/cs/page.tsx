@@ -8,7 +8,6 @@ import {
   Cpu,
   GraduationCap,
   Terminal,
-  Globe,
   ArrowDown,
   Twitter,
   Puzzle,
@@ -17,62 +16,38 @@ import {
   Download,
   BookOpen
 } from 'lucide-react';
-
-const Block = ({ children, className = "", color = "bg-white", noHover = false }: { children: React.ReactNode, className?: string, color?: string, noHover?: boolean }) => (
-  <div className={`
-    ${color} 
-    border-[3px] border-black 
-    shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] 
-    ${!noHover ? 'hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px]' : ''}
-    transition-all duration-100 
-    rounded-xl p-8 
-    ${className}
-  `}>
-    {children}
-  </div>
-);
-
-const Badge = ({ children }: { children: React.ReactNode }) => (
-  <span className="inline-block bg-white border-2 border-black px-4 py-1 text-sm font-black rounded shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] m-1 uppercase tracking-tight">
-    {children}
-  </span>
-);
+import { Block } from '@/components/ui/Block';
+import { Badge } from '@/components/ui/Badge';
 
 export default function CSPage() {
-  const skills = [
-    "React", "Python", "Java", "JavaScript", "TypeScript",
-    "HTML/CSS", "Flutter", "Figma", "UI/UX Design",
-    "Graphic Design", "Davinci Resolve", "Canva"
-  ];
-
   const experiences = [
     {
-      company: "Georgia Tech Office of Information Technology",
-      role: "Web Developer",
-      period: "Sep 2025 - Present",
-      description: "Developing and maintaining official institutional websites using HTML5, CSS3, JavaScript, React, and CMS platforms. Ensuring accessibility compliance (WCAG), optimizing performance, and collaborating with stakeholders to create responsive digital experiences.",
-      skills: ["React", "Drupal", "WCAG", "SEO"]
-    },
-    {
-      company: "SlatePath",
+      company: "SlatePath.ai",
       role: "Founder, Chief Technology Officer",
       period: "Aug 2025 - Present",
-      description: "Leading the technical vision of an AI-powered student success platform. Architecting scalable infrastructure and developing full-stack solutions using React, Node.js, and Python to provide personalized learning experiences and academic planning.",
-      skills: ["React", "Node.js", "Python", "AWS", "AI/ML"]
+      description: "Architected and led end-to-end development of an AI student success platform. Engineered Python (FastAPI) AI microservices leveraging MediaPipe, Deepgram, and LLMs. Designed a Next.js application with AI-powered TestPrep, Roadmap Builder, and application assistant. Implemented a RAG pipeline using LangChain and Supabase (pgvector).",
+      skills: ["Next.js", "FastAPI", "LangChain", "RAG", "Supabase", "MediaPipe"]
     },
     {
-      company: "Autonomous & Connected Transportation Lab",
+      company: "Office of Information Technology (OIT), Georgia Tech",
+      role: "Web Developer",
+      period: "Sep 2025 - Present",
+      description: "Maintaining high-traffic official Georgia Tech websites for 45k+ users. Developed custom components using CampusPress, Drupal, and JavaScript to ensure 100% uptime for critical services.",
+      skills: ["CampusPress", "Drupal", "JavaScript"]
+    },
+    {
+      company: "Autonomous & Connected Transportation (ACT) Lab, Georgia Tech",
       role: "Undergraduate Researcher",
       period: "Aug 2025 - Present",
-      description: "Analyzing eye-tracking data to understand driver reactions to autonomous vehicles. Developing Python scripts for attention map visualization and presenting findings on human behavior in mixed-traffic scenarios.",
-      skills: ["Python", "Data Analysis", "Computer Vision"]
+      description: "Analyzing eye-tracking and gaze data from driving simulators to model driver attention when interacting with autonomous vehicles. Developing Python scripts to programmatically generate attention maps and visualize driver reactions.",
+      skills: ["Python", "Eye-tracking", "Data Visualization"]
     },
     {
       company: "LumaDent, Inc.",
-      role: "Software Engineer Intern",
+      role: "Software Engineering Intern",
       period: "May 2025 - Jul 2025",
-      description: "Engineered internal apps using LLMs and developed high-precision computer vision models (YOLO, OpenCV) for object detection. Spearheaded full-stack development of a web app using React, Node.js, and PostgreSQL, and executed comprehensive QA strategies for software and hardware.",
-      skills: ["YOLOv8", "OpenCV", "React", "PostgreSQL", "LLMs"]
+      description: "Developed a custom CV model for IPD estimation with <2mm error and 95% reliability. Spearheaded full-stack development of a dynamic web application using React, Node.js, and PostgreSQL.",
+      skills: ["OpenCV", "React", "Node.js", "PostgreSQL"]
     }
   ];
 
@@ -80,58 +55,48 @@ export default function CSPage() {
     {
       title: "QuantumGuard",
       tags: ["Security", "Extension"],
-      desc: "Privacy-first browser extension that generates quantum-resistant passphrases using the EFF Diceware wordlist.",
+      desc: "Privacy-first browser extension that generates quantum-resistant passphrases using the EFF Diceware wordlist with cryptographically secure randomness.",
       link: "#"
     },
     {
       title: "GoalTube",
       tags: ["Productivity", "Extension"],
-      desc: "Transform YouTube into a productivity tool by replacing your homepage with curated videos from focused categories.",
+      desc: "Transform YouTube into a productivity tool by replacing your homepage with curated videos from categories like self-improvement, entrepreneurship, and AI.",
       link: "#"
     },
     {
       title: "AI Geoguesser",
       tags: ["AI", "Extension"],
-      desc: "AI-powered location guesser that uses the Gemini API to analyze screenshots and predict geographic locations.",
+      desc: "AI-powered location guesser that uses the Gemini API to analyze screenshots and predict geographic locations for GeoGuessr gameplay.",
       link: "#"
     }
   ];
 
   const csProjects = [
     {
+      title: "ResuMax",
+      tags: ["Node.js", "React", "Firebase"],
+      desc: "Engineered a multi-step AI processing pipeline using an LLM to parse resume PDFs and extract structured JSON data. AI-driven ATS checker that scores resumes against job descriptions.",
+      link: "#"
+    },
+    {
       title: "DigitalTwin",
-      tags: ["React", "TypeScript", "ML"],
-      desc: "First Place Winner at Ramblin' Hacks 2025. ML-powered health simulation that predicts biological aging based on lifestyle choices.",
+      tags: ["React", "Python", "XGBoost"],
+      desc: "1st Place at Ramblin' Hacks. Developed a health-tech app using an XGBoost model to simulate a user's biological age trajectory based on lifestyle choices.",
       link: "https://devpost.com/software/digitaltwin"
     },
     {
       title: "WattsTheMatter",
-      tags: ["React", "Flask", "AST"],
-      desc: "Best Overall Hack Winner at EnergyHack@GT. Predicts ML model energy consumption and carbon emissions before training.",
+      tags: ["React", "TypeScript", "Flask"],
+      desc: "Best Overall Hack at EnergyHack@GT. Developed a web application that statically analyzes ML code to predict energy consumption and carbon emissions before training.",
       link: "https://devpost.com/software/wattsthematter"
     },
     {
-      title: "LLMuminate",
-      tags: ["Chrome Ext", "AI"],
-      desc: "Fact-checks AI responses against peer-reviewed sources like PubMed to combat inaccuracy in LLM responses.",
-      link: "https://github.com/AAsteriskz7/LLMuminate.ai"
-    },
-    {
       title: "Onco-Bot",
-      tags: ["AI", "OpenCV"],
-      desc: "Third Place Winner at HackGT 11. AI-powered skin cancer detection using computer vision to analyze skin lesions.",
+      tags: ["Python", "OpenCV", "Google Maps"],
+      desc: "3rd Place at HackGT 11. Discord bot that uses OpenCV to detect melanoma signs from user images, achieving 90% diagnostic accuracy on a validation set.",
       link: "https://devpost.com/software/oncobot-qlkv0n"
     }
-  ];
-
-  const certifications = [
-    {
-      title: "AWS Certified Cloud Practitioner",
-      issuer: "Amazon Web Services",
-      date: "2024",
-      desc: "Foundational understanding of AWS Cloud concepts, security, and compliance."
-    },
-    // Add more certifications here
   ];
 
   const awards = [
@@ -155,10 +120,40 @@ export default function CSPage() {
     }
   ];
 
+  const certifications = [
+    {
+      title: "The Cybersecurity Threat Landscape",
+      issuer: "LinkedIn",
+      date: "2025",
+      desc: "Comprehensive overview of modern cybersecurity threats and vulnerability management."
+    },
+    {
+      title: "RCR Basic Course",
+      issuer: "CITI Program",
+      date: "2025",
+      desc: "Responsible Conduct of Research training covering ethics in scientific research."
+    }
+  ];
+
+  const skillCategories = [
+    {
+      category: "Languages",
+      skills: ["Python", "JavaScript", "Java", "HTML/CSS", "SQL", "Dart", "PHP", "C"]
+    },
+    {
+      category: "Frameworks & Platforms",
+      skills: ["React", "Next.js", "FastAPI", "LangChain", "OpenCV", "PostgreSQL", "Supabase", "Firebase", "Git"]
+    },
+    {
+      category: "AI & Machine Learning",
+      skills: ["LLMs", "RAG", "Prompt Engineering", "Computer Vision", "YOLO", "MediaPipe", "Deepgram"]
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-[#F0F0F0] text-black font-sans selection:bg-yellow-300">
 
-      {/* 1. LANDING PAGE / HERO SECTION */}
+      {/* HERO SECTION */}
       <section className="min-h-screen flex flex-col items-center justify-center p-6 md:p-12">
         <Block color="bg-white" className="max-w-6xl w-full text-center md:text-left py-16 md:py-24 relative overflow-hidden" noHover>
           <div className="absolute top-4 right-4 hidden md:flex gap-2">
@@ -171,10 +166,10 @@ export default function CSPage() {
             Adarsh Setty
           </h1>
           <p className="text-xl md:text-3xl font-bold text-zinc-600 mb-8 uppercase tracking-tight">
-            Creative Developer & Designer
+            Computer Science
           </p>
 
-          <div className="flex flex-col md:flex-row md:items-center gap-6 mb-12">
+          <div className="flex flex-col md:flex-row md:items-center gap-6 mb-8">
             <div className="flex items-center gap-2 font-black text-sm uppercase bg-yellow-300 border-2 border-black px-4 py-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse border border-black"></span>
               Available for work
@@ -184,7 +179,7 @@ export default function CSPage() {
             </p>
           </div>
 
-          <div className="flex justify-center md:justify-start gap-4">
+          <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-8">
             <a href="https://www.linkedin.com/in/adarshsetty/" target="_blank" rel="noopener noreferrer" className="p-3 border-2 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-zinc-100 active:translate-y-1 active:shadow-none transition-all">
               <Linkedin size={24} />
             </a>
@@ -194,13 +189,14 @@ export default function CSPage() {
             <a href="https://x.com/aasteriskz" target="_blank" rel="noopener noreferrer" className="p-3 border-2 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-zinc-100 active:translate-y-1 active:shadow-none transition-all">
               <Twitter size={24} />
             </a>
-            <a href="mailto:adarshsetty1@gmail.com" className="p-3 border-2 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-zinc-100 active:translate-y-1 active:shadow-none transition-all">
+            <a href="mailto:adarsh@gatech.edu" className="p-3 border-2 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-zinc-100 active:translate-y-1 active:shadow-none transition-all">
               <Mail size={24} />
             </a>
             <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-3 border-2 border-black bg-yellow-300 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-yellow-400 active:translate-y-1 active:shadow-none transition-all font-black uppercase text-sm">
               <Download size={20} /> Resume
             </a>
           </div>
+
         </Block>
 
         <div className="mt-12 animate-bounce flex flex-col items-center gap-2 opacity-50 font-black uppercase text-xs">
@@ -209,7 +205,7 @@ export default function CSPage() {
         </div>
       </section>
 
-      {/* 2. SCROLL CONTENT AREA */}
+      {/* MAIN CONTENT */}
       <div className="max-w-6xl mx-auto px-6 pb-24 space-y-12">
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
@@ -242,18 +238,23 @@ export default function CSPage() {
             </Block>
           </section>
 
-          {/* Right Column: Skills, Learning, Education */}
+          {/* Right Column */}
           <section className="md:col-span-4 space-y-8">
             {/* Tech Stack */}
             <Block color="bg-purple-200">
               <h2 className="text-2xl font-black uppercase mb-6 flex items-center gap-3">
                 <Cpu size={24} strokeWidth={3} /> Tech Stack
               </h2>
-              <div className="flex flex-wrap gap-1">
-                {skills.map(skill => (
-                  <Badge key={skill}>{skill}</Badge>
-                ))}
-              </div>
+              {skillCategories.map((cat) => (
+                <div key={cat.category} className="mb-4">
+                  <p className="font-black text-xs uppercase text-zinc-600 mb-2">{cat.category}</p>
+                  <div className="flex flex-wrap gap-1">
+                    {cat.skills.map(skill => (
+                      <Badge key={skill}>{skill}</Badge>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </Block>
 
             {/* Currently Learning */}
@@ -277,7 +278,7 @@ export default function CSPage() {
               </div>
             </Block>
 
-            {/* Education (Moved) */}
+            {/* Education */}
             <Block color="bg-orange-200">
               <h2 className="text-2xl font-black uppercase mb-4 flex items-center gap-3">
                 <GraduationCap size={24} strokeWidth={3} /> Education
@@ -286,7 +287,9 @@ export default function CSPage() {
                 <div>
                   <p className="text-xl font-black">B.S. in Computer Science</p>
                   <p className="font-bold text-zinc-600 uppercase text-sm tracking-wide">Georgia Institute of Technology</p>
-                  <p className="text-xs font-bold mt-2">Concentrations: Intelligence & Media</p>
+                  <p className="text-xs font-bold mt-2">GPA: 3.77/4.0 • Minor in Fintech</p>
+                  <p className="text-xs font-bold mt-1">Concentrations: AI & Cybersecurity</p>
+                  <p className="text-xs text-zinc-600 mt-2 leading-relaxed">Coursework: Design & Analysis of Algorithms, Systems & Networks, Computer Organization, Data Structures & Algorithms, OOP, Discrete Math, Linear Algebra, Multivariable Calculus</p>
                 </div>
               </div>
             </Block>
@@ -321,11 +324,6 @@ export default function CSPage() {
                   ))}
                 </div>
                 <p className="text-zinc-600 font-medium mb-6 flex-grow leading-snug">{project.desc}</p>
-                {project.link !== "#" && (
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="w-full py-3 bg-black text-white font-black uppercase tracking-widest hover:bg-zinc-800 transition-colors text-center block">
-                    View Extension
-                  </a>
-                )}
               </Block>
             ))}
           </div>
@@ -423,30 +421,15 @@ export default function CSPage() {
         <section>
           <Block color="bg-blue-400" className="flex flex-col items-center justify-center text-center p-12">
             <h3 className="text-2xl font-black mb-6 uppercase leading-tight">Got a project in mind?</h3>
-            <a href="mailto:adarshsetty1@gmail.com" className="group flex items-center gap-2 bg-white text-black px-8 py-4 border-[3px] border-black font-black uppercase tracking-tighter hover:bg-yellow-300 transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-1 active:translate-y-1">
-              LET'S TALK <Mail size={20} className="group-hover:translate-x-1 transition-transform" />
+            <a href="mailto:adarsh@gatech.edu" className="group flex items-center gap-2 bg-white text-black px-8 py-4 border-[3px] border-black font-black uppercase tracking-tighter hover:bg-yellow-300 transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-1 active:translate-y-1">
+              LET&apos;S TALK <Mail size={20} className="group-hover:translate-x-1 transition-transform" />
             </a>
           </Block>
         </section>
 
-        {/* Bottom Info Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Block color="bg-green-200">
-            <h2 className="text-2xl font-black uppercase mb-4 flex items-center gap-3">
-              <Globe size={24} strokeWidth={3} /> Languages
-            </h2>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <p className="font-black text-xs uppercase text-zinc-500">English</p>
-                <p className="font-bold text-lg italic">Native Proficiency</p>
-              </div>
-            </div>
-          </Block>
-        </div>
-
       </div>
 
-      {/* Simplified Footer */}
+      {/* Footer */}
       <footer className="border-t-[3px] border-black bg-white p-12 text-center">
         <p className="font-black text-sm uppercase tracking-[0.2em]">
           Built with React & Logic • 2026

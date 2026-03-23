@@ -1,2 +1,0 @@
-# AdarshPortfolio
- My Portfolio
