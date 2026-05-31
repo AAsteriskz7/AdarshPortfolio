@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { Block } from '@/components/ui/Block';
 import { Badge } from '@/components/ui/Badge';
+import Link from 'next/link';
 
 export default function Home() {
   const experiences = [
@@ -273,6 +274,9 @@ export default function Home() {
             <a href="mailto:adarsh@gatech.edu" className="p-3 border-2 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-zinc-100 active:translate-y-1 active:shadow-none transition-all">
               <Mail size={24} />
             </a>
+            <Link href="/blog" className="flex items-center gap-2 px-4 py-3 border-2 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-zinc-100 active:translate-y-1 active:shadow-none transition-all font-black uppercase text-sm">
+              <BookOpen size={20} /> Blog
+            </Link>
             <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-3 border-2 border-black bg-yellow-300 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-yellow-400 active:translate-y-1 active:shadow-none transition-all font-black uppercase text-sm">
               <Download size={20} /> Resume
             </a>
